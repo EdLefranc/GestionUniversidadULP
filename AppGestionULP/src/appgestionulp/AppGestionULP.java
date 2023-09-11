@@ -5,6 +5,8 @@
  */
 package appgestionulp;
 
+import AccesoADatos.Conexion;
+
 /**
  *
  * @author Ed Le Franc
@@ -15,7 +17,15 @@ public class AppGestionULP {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        //instanciamos un objeto de tipo Conexion.
+        Conexion conn = new Conexion();
+        
+        try {
+            conn.Conexion_Maria();
+            System.out.println("Conexion establecida");
+        } catch (Exception e) {
+            System.out.println("No se ha podido conectar, error: " + e);
+        }
     }
     
 }
