@@ -46,6 +46,18 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         btn_Eliminar_Alumno = new javax.swing.JButton();
         IF_Materia = new javax.swing.JInternalFrame();
         IF_Administracion = new javax.swing.JInternalFrame();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
         IF_Consultas = new javax.swing.JInternalFrame();
         Menu_Nav = new javax.swing.JMenuBar();
         JM_Alumno = new javax.swing.JMenu();
@@ -61,8 +73,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         opcionSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
-        getContentPane().setLayout(new java.awt.GridLayout());
+        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         jDesktopPane1.setPreferredSize(new java.awt.Dimension(800, 600));
         jDesktopPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -203,15 +214,115 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         IF_Administracion.setPreferredSize(new java.awt.Dimension(450, 450));
         IF_Administracion.setVisible(true);
 
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel7.setText("Formulario de Inscripcion");
+
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel8.setText("Seleccione un alumno:");
+
+        jComboBox1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel9.setText("Listado de Materias");
+
+        jRadioButton1.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        jRadioButton1.setText("Materias Inscriptas");
+
+        jRadioButton2.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        jRadioButton2.setText("Materias no Inscriptas");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton1.setText("Inscribir");
+
+        jButton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton2.setText("Anular Inscripcion");
+
+        jButton3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton3.setText("Salir");
+
         javax.swing.GroupLayout IF_AdministracionLayout = new javax.swing.GroupLayout(IF_Administracion.getContentPane());
         IF_Administracion.getContentPane().setLayout(IF_AdministracionLayout);
         IF_AdministracionLayout.setHorizontalGroup(
             IF_AdministracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IF_AdministracionLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addGap(130, 130, 130))
+            .addGroup(IF_AdministracionLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jButton1)
+                .addGap(67, 67, 67)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(28, 28, 28))
+            .addGroup(IF_AdministracionLayout.createSequentialGroup()
+                .addGroup(IF_AdministracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(IF_AdministracionLayout.createSequentialGroup()
+                        .addGap(158, 158, 158)
+                        .addComponent(jLabel9))
+                    .addGroup(IF_AdministracionLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel8)
+                        .addGap(41, 41, 41)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(IF_AdministracionLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(IF_AdministracionLayout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(jRadioButton1)
+                        .addGap(28, 28, 28)
+                        .addComponent(jRadioButton2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IF_AdministracionLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         IF_AdministracionLayout.setVerticalGroup(
             IF_AdministracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(IF_AdministracionLayout.createSequentialGroup()
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addGroup(IF_AdministracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(jLabel9)
+                .addGap(31, 31, 31)
+                .addGroup(IF_AdministracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addGroup(IF_AdministracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addGap(0, 41, Short.MAX_VALUE))
         );
 
         jDesktopPane1.add(IF_Administracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 400));
@@ -269,7 +380,6 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         Menu_Nav.add(JM_Admin);
 
         JM_Consultas.setText("Consultas");
-        JM_Consultas.setActionCommand("Consultas");
 
         consulta_alumMaterias.setText("Alumnos por Materias");
         JM_Consultas.add(consulta_alumMaterias);
@@ -292,6 +402,10 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private void form_alumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_form_alumnoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_form_alumnoActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -353,6 +467,10 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem form_manejoInscripciones;
     private javax.swing.JMenuItem form_materia;
     private javax.swing.JMenuItem form_modNotas;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -360,6 +478,14 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JMenuItem opcionSalir;
     // End of variables declaration//GEN-END:variables
 }
