@@ -48,9 +48,9 @@ public class Conexion {
         try {
             Class.forName("org.mariadb.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/universidadulp", "root", "");
-            System.out.println("Conectado!");                            
+            System.out.println("Conected to data base!");                            
         } catch (SQLException e) {
-            System.out.println("No conectado");
+            System.out.println("No conected");
         }
         Connection cn = null;
         return cn;       

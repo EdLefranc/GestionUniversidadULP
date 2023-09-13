@@ -61,8 +61,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         opcionSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
-        getContentPane().setLayout(new java.awt.GridLayout());
+        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         jDesktopPane1.setPreferredSize(new java.awt.Dimension(800, 600));
         jDesktopPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -75,6 +74,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         IF_Alumno.setPreferredSize(new java.awt.Dimension(800, 600));
         IF_Alumno.setVisible(true);
 
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Alumno");
 
         jLabel2.setText("DNI");
@@ -168,7 +168,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addComponent(JDC_FechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Eliminar_Alumno)
                     .addComponent(btn_Nuevo_Alumno)
@@ -269,7 +269,6 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         Menu_Nav.add(JM_Admin);
 
         JM_Consultas.setText("Consultas");
-        JM_Consultas.setActionCommand("Consultas");
 
         consulta_alumMaterias.setText("Alumnos por Materias");
         JM_Consultas.add(consulta_alumMaterias);
