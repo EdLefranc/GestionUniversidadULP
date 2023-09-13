@@ -5,6 +5,8 @@
  */
 package Vistas;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Ed Le Franc
@@ -16,6 +18,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
      */
     public GestionUniversidadGUI() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -279,6 +282,11 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         JM_Salir.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
         opcionSalir.setText("Salir de la Aplicación");
+        opcionSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opcionSalirActionPerformed(evt);
+            }
+        });
         JM_Salir.add(opcionSalir);
 
         Menu_Nav.add(JM_Salir);
@@ -291,6 +299,20 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private void form_alumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_form_alumnoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_form_alumnoActionPerformed
+
+    private void opcionSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionSalirActionPerformed
+        int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "¿Estás seguro de que quieres cerrar la aplicación?",
+            "Confirmar Cierre",
+            JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            // Cierra la aplicación
+            System.exit(0);
+        }
+    }//GEN-LAST:event_opcionSalirActionPerformed
 
     /**
      * @param args the command line arguments

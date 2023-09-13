@@ -5,6 +5,7 @@
  */
 package appgestionulp;
 
+import AccesoADatos.AlumnoData;
 import AccesoADatos.Conexion;
 import AccesoADatos.InscripcionData;
 import Entidades.Materia;
@@ -25,6 +26,9 @@ public class AppGestionULP {
         //instanciamos un objeto de tipo Conexion.
         Conexion conn = new Conexion();
         InscripcionData insc = new InscripcionData();
+        AlumnoData dataAlumno = new AlumnoData();
+        
+        //dataAlumno.
 //        List<Materia> materias = new ArrayList<>();
 //        String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion, materia WHERE inscripcion.idMateria = materia.idMateria AND inscripcion.idAlumno = ?;";
 //        String otraFormaSQL = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion JOIN materia ON(inscripcion.idMateria = materia.idMateria) WHERE inscripcion.idAlumno = ?;";
@@ -55,7 +59,8 @@ public class AppGestionULP {
 //        } catch (SQLException e) {
 //            System.out.println("No se ha podido mostrar los datos papu.\nERROR:\n" + e);
 //        }
-    insc.obtenerMateriasCursadas(4);
-    }
+        insc.obtenerMateriasCursadas(4);
+        }
+    
     
 }
