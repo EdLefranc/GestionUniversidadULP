@@ -45,7 +45,33 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         btn_Nuevo_Alumno = new javax.swing.JButton();
         btn_Eliminar_Alumno = new javax.swing.JButton();
         IF_Materia = new javax.swing.JInternalFrame();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        RB_Activo_Materia = new javax.swing.JRadioButton();
+        JT_CodigoMateria = new javax.swing.JTextField();
+        btn_Buscar_Cod_Materia = new javax.swing.JButton();
+        btn_Nuevo_Materia = new javax.swing.JButton();
+        btn_Eliminar_Materia = new javax.swing.JButton();
+        btn_Guardar_Materia = new javax.swing.JButton();
+        btn_Salir_Materia = new javax.swing.JButton();
+        JT_NombreMateria = new javax.swing.JTextField();
+        JT_AñoMateria = new javax.swing.JTextField();
         IF_Administracion = new javax.swing.JInternalFrame();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
         IF_Consultas = new javax.swing.JInternalFrame();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -142,7 +168,11 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                         .addComponent(btn_Eliminar_Alumno)
                         .addGap(18, 18, 18)
                         .addComponent(btn_Guardar_Alumno)))
+
                 .addContainerGap(357, Short.MAX_VALUE))
+
+                .addContainerGap(113, Short.MAX_VALUE))
+
         );
         IF_AlumnoLayout.setVerticalGroup(
             IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,15 +219,129 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         IF_Materia.setTitle("Formulario de Materias");
         IF_Materia.setVisible(true);
 
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel7.setText("Materia");
+
+        jLabel8.setText("Código:");
+
+        jLabel9.setText("Nombre:");
+
+        jLabel10.setText("Año:");
+
+        jLabel11.setText("Estado:");
+
+        RB_Activo_Materia.setText("Activo");
+
+        JT_CodigoMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JT_CodigoMateriaActionPerformed(evt);
+            }
+        });
+
+        btn_Buscar_Cod_Materia.setText("Buscar");
+
+        btn_Nuevo_Materia.setText("Nuevo");
+        btn_Nuevo_Materia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Nuevo_MateriaActionPerformed(evt);
+            }
+        });
+
+        btn_Eliminar_Materia.setText("Eliminar");
+        btn_Eliminar_Materia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Eliminar_MateriaActionPerformed(evt);
+            }
+        });
+
+        btn_Guardar_Materia.setText("Guardar");
+        btn_Guardar_Materia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Guardar_MateriaActionPerformed(evt);
+            }
+        });
+
+        btn_Salir_Materia.setText("Salir");
+        btn_Salir_Materia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Salir_MateriaActionPerformed(evt);
+            }
+        });
+
+        JT_AñoMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JT_AñoMateriaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout IF_MateriaLayout = new javax.swing.GroupLayout(IF_Materia.getContentPane());
         IF_Materia.getContentPane().setLayout(IF_MateriaLayout);
         IF_MateriaLayout.setHorizontalGroup(
             IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(IF_MateriaLayout.createSequentialGroup()
+                .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(IF_MateriaLayout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(IF_MateriaLayout.createSequentialGroup()
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(JT_CodigoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(btn_Buscar_Cod_Materia))
+                            .addGroup(IF_MateriaLayout.createSequentialGroup()
+                                .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel11))
+                                .addGap(18, 18, 18)
+                                .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(JT_AñoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(JT_NombreMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(RB_Activo_Materia)))))
+                    .addGroup(IF_MateriaLayout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(btn_Nuevo_Materia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_Eliminar_Materia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_Guardar_Materia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_Salir_Materia))
+                    .addGroup(IF_MateriaLayout.createSequentialGroup()
+                        .addGap(178, 178, 178)
+                        .addComponent(jLabel7)))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
         IF_MateriaLayout.setVerticalGroup(
             IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(IF_MateriaLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel7)
+                .addGap(38, 38, 38)
+                .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(JT_CodigoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_Buscar_Cod_Materia))
+                .addGap(18, 18, 18)
+                .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(JT_NombreMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(JT_AñoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(RB_Activo_Materia))
+                .addGap(33, 33, 33)
+                .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_Nuevo_Materia)
+                    .addComponent(btn_Eliminar_Materia)
+                    .addComponent(btn_Guardar_Materia)
+                    .addComponent(btn_Salir_Materia))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         jDesktopPane1.add(IF_Materia, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 440));
@@ -208,15 +352,115 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         IF_Administracion.setPreferredSize(new java.awt.Dimension(450, 450));
         IF_Administracion.setVisible(true);
 
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel7.setText("Formulario de Inscripcion");
+
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel8.setText("Seleccione un alumno:");
+
+        jComboBox1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel9.setText("Listado de Materias");
+
+        jRadioButton1.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        jRadioButton1.setText("Materias Inscriptas");
+
+        jRadioButton2.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        jRadioButton2.setText("Materias no Inscriptas");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton1.setText("Inscribir");
+
+        jButton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton2.setText("Anular Inscripcion");
+
+        jButton3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton3.setText("Salir");
+
         javax.swing.GroupLayout IF_AdministracionLayout = new javax.swing.GroupLayout(IF_Administracion.getContentPane());
         IF_Administracion.getContentPane().setLayout(IF_AdministracionLayout);
         IF_AdministracionLayout.setHorizontalGroup(
             IF_AdministracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IF_AdministracionLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addGap(130, 130, 130))
+            .addGroup(IF_AdministracionLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jButton1)
+                .addGap(67, 67, 67)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(28, 28, 28))
+            .addGroup(IF_AdministracionLayout.createSequentialGroup()
+                .addGroup(IF_AdministracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(IF_AdministracionLayout.createSequentialGroup()
+                        .addGap(158, 158, 158)
+                        .addComponent(jLabel9))
+                    .addGroup(IF_AdministracionLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel8)
+                        .addGap(41, 41, 41)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(IF_AdministracionLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(IF_AdministracionLayout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(jRadioButton1)
+                        .addGap(28, 28, 28)
+                        .addComponent(jRadioButton2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IF_AdministracionLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         IF_AdministracionLayout.setVerticalGroup(
             IF_AdministracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(IF_AdministracionLayout.createSequentialGroup()
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addGroup(IF_AdministracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(jLabel9)
+                .addGap(31, 31, 31)
+                .addGroup(IF_AdministracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addGroup(IF_AdministracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addGap(0, 41, Short.MAX_VALUE))
         );
 
         jDesktopPane1.add(IF_Administracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 400));
@@ -357,9 +601,55 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_form_alumnoActionPerformed
 
+
     private void salir(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salir
         // TODO add your handling code here:
     }//GEN-LAST:event_salir
+
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+
+    private void JT_CodigoMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JT_CodigoMateriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JT_CodigoMateriaActionPerformed
+
+    private void btn_Nuevo_MateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Nuevo_MateriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_Nuevo_MateriaActionPerformed
+
+    private void btn_Eliminar_MateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Eliminar_MateriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_Eliminar_MateriaActionPerformed
+
+    private void btn_Guardar_MateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Guardar_MateriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_Guardar_MateriaActionPerformed
+
+    private void btn_Salir_MateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Salir_MateriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_Salir_MateriaActionPerformed
+
+    private void JT_AñoMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JT_AñoMateriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JT_AñoMateriaActionPerforme
+    private void opcionSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionSalirActionPerformed
+        int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "¿Estás seguro de que quieres cerrar la aplicación?",
+            "Confirmar Cierre",
+            JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            // Cierra la aplicación
+            System.exit(0);
+        }
+    }//GEN-LAST:event_opcionSalirActionPerformed
+
+
 
     /**
      * @param args the command line arguments
@@ -409,23 +699,44 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JMenu JM_Materia;
     private javax.swing.JMenu JM_Salir;
     private javax.swing.JTextField JT_Apellido;
+    private javax.swing.JTextField JT_AñoMateria;
+    private javax.swing.JTextField JT_CodigoMateria;
     private javax.swing.JTextField JT_Dni;
     private javax.swing.JTextField JT_Nombre;
+    private javax.swing.JTextField JT_NombreMateria;
     private javax.swing.JMenuBar Menu_Nav;
     private javax.swing.JRadioButton RB_Activo;
+
     private javax.swing.JScrollPane SP_Tabla;
+
+    private javax.swing.JRadioButton RB_Activo_Materia;
+
     private javax.swing.JButton btn_Buscar;
+    private javax.swing.JButton btn_Buscar_Cod_Materia;
     private javax.swing.JButton btn_Eliminar_Alumno;
+    private javax.swing.JButton btn_Eliminar_Materia;
     private javax.swing.JButton btn_Guardar_Alumno;
+    private javax.swing.JButton btn_Guardar_Materia;
     private javax.swing.JButton btn_Nuevo_Alumno;
+
     private javax.swing.JButton btn_Salir_Consults;
+
+    private javax.swing.JButton btn_Nuevo_Materia;
+    private javax.swing.JButton btn_Salir_Materia;
+
     private javax.swing.JMenuItem consulta_alumMaterias;
     private javax.swing.JMenuItem form_alumno;
     private javax.swing.JMenuItem form_manejoInscripciones;
     private javax.swing.JMenuItem form_materia;
     private javax.swing.JMenuItem form_modNotas;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -433,7 +744,18 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+
     private javax.swing.JTable jTable1;
+
+    private javax.swing.JLabel jLabel9;
+
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable jTable1;
+
+
     private javax.swing.JMenuItem opcionSalir;
     // End of variables declaration//GEN-END:variables
 }
