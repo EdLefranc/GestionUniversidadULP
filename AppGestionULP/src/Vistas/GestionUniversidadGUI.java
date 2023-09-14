@@ -5,8 +5,6 @@
  */
 package Vistas;
 
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author Ed Le Franc
@@ -18,7 +16,6 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
      */
     public GestionUniversidadGUI() {
         initComponents();
-        setLocationRelativeTo(null);
     }
 
     /**
@@ -50,6 +47,12 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         IF_Materia = new javax.swing.JInternalFrame();
         IF_Administracion = new javax.swing.JInternalFrame();
         IF_Consultas = new javax.swing.JInternalFrame();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        SP_Tabla = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        btn_Salir_Consults = new javax.swing.JButton();
+        CB_Seleccion_Materia = new javax.swing.JComboBox<>();
         Menu_Nav = new javax.swing.JMenuBar();
         JM_Alumno = new javax.swing.JMenu();
         form_alumno = new javax.swing.JMenuItem();
@@ -77,7 +80,6 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         IF_Alumno.setPreferredSize(new java.awt.Dimension(800, 600));
         IF_Alumno.setVisible(true);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Alumno");
 
         jLabel2.setText("DNI");
@@ -140,7 +142,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                         .addComponent(btn_Eliminar_Alumno)
                         .addGap(18, 18, 18)
                         .addComponent(btn_Guardar_Alumno)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(357, Short.MAX_VALUE))
         );
         IF_AlumnoLayout.setVerticalGroup(
             IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +173,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addComponent(JDC_FechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
                 .addGroup(IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Eliminar_Alumno)
                     .addComponent(btn_Nuevo_Alumno)
@@ -225,15 +227,75 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         IF_Consultas.setTitle("Consulta Alumnos por Materia");
         IF_Consultas.setVisible(true);
 
+        jLabel7.setText("Seleccione una materia:");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setText("Listado de Alumnos por Materia");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "DNI", "Apellido", "Nombre"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        SP_Tabla.setViewportView(jTable1);
+
+        btn_Salir_Consults.setText("Salir");
+        btn_Salir_Consults.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salir(evt);
+            }
+        });
+
+        CB_Seleccion_Materia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout IF_ConsultasLayout = new javax.swing.GroupLayout(IF_Consultas.getContentPane());
         IF_Consultas.getContentPane().setLayout(IF_ConsultasLayout);
         IF_ConsultasLayout.setHorizontalGroup(
             IF_ConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(IF_ConsultasLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(IF_ConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(SP_Tabla, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addGroup(IF_ConsultasLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(78, 78, 78)
+                        .addComponent(CB_Seleccion_Materia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn_Salir_Consults, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
         IF_ConsultasLayout.setVerticalGroup(
             IF_ConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(IF_ConsultasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addGap(28, 28, 28)
+                .addGroup(IF_ConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(CB_Seleccion_Materia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SP_Tabla, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
+                .addComponent(btn_Salir_Consults)
+                .addContainerGap())
         );
 
         jDesktopPane1.add(IF_Consultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 400));
@@ -282,11 +344,6 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         JM_Salir.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
         opcionSalir.setText("Salir de la Aplicación");
-        opcionSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                opcionSalirActionPerformed(evt);
-            }
-        });
         JM_Salir.add(opcionSalir);
 
         Menu_Nav.add(JM_Salir);
@@ -300,19 +357,9 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_form_alumnoActionPerformed
 
-    private void opcionSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionSalirActionPerformed
-        int confirm = JOptionPane.showConfirmDialog(
-            this,
-            "¿Estás seguro de que quieres cerrar la aplicación?",
-            "Confirmar Cierre",
-            JOptionPane.YES_NO_OPTION
-        );
-
-        if (confirm == JOptionPane.YES_OPTION) {
-            // Cierra la aplicación
-            System.exit(0);
-        }
-    }//GEN-LAST:event_opcionSalirActionPerformed
+    private void salir(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salir
+        // TODO add your handling code here:
+    }//GEN-LAST:event_salir
 
     /**
      * @param args the command line arguments
@@ -350,6 +397,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> CB_Seleccion_Materia;
     private javax.swing.JInternalFrame IF_Administracion;
     private javax.swing.JInternalFrame IF_Alumno;
     private javax.swing.JInternalFrame IF_Consultas;
@@ -365,10 +413,12 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JTextField JT_Nombre;
     private javax.swing.JMenuBar Menu_Nav;
     private javax.swing.JRadioButton RB_Activo;
+    private javax.swing.JScrollPane SP_Tabla;
     private javax.swing.JButton btn_Buscar;
     private javax.swing.JButton btn_Eliminar_Alumno;
     private javax.swing.JButton btn_Guardar_Alumno;
     private javax.swing.JButton btn_Nuevo_Alumno;
+    private javax.swing.JButton btn_Salir_Consults;
     private javax.swing.JMenuItem consulta_alumMaterias;
     private javax.swing.JMenuItem form_alumno;
     private javax.swing.JMenuItem form_manejoInscripciones;
@@ -381,6 +431,9 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JTable jTable1;
     private javax.swing.JMenuItem opcionSalir;
     // End of variables declaration//GEN-END:variables
 }
