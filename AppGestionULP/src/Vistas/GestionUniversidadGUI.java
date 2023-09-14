@@ -5,6 +5,8 @@
  */
 package Vistas;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Ed Le Franc
@@ -16,6 +18,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
      */
     public GestionUniversidadGUI() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -88,6 +91,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         IF_Alumno.setPreferredSize(new java.awt.Dimension(800, 600));
         IF_Alumno.setVisible(true);
 
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Alumno");
 
         jLabel2.setText("DNI");
@@ -181,7 +185,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addComponent(JDC_FechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Eliminar_Alumno)
                     .addComponent(btn_Nuevo_Alumno)
@@ -406,6 +410,11 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         JM_Salir.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
         opcionSalir.setText("Salir de la Aplicación");
+        opcionSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opcionSalirActionPerformed(evt);
+            }
+        });
         JM_Salir.add(opcionSalir);
 
         Menu_Nav.add(JM_Salir);
@@ -418,6 +427,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private void form_alumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_form_alumnoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_form_alumnoActionPerformed
+
 
     private void JT_CodigoMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JT_CodigoMateriaActionPerformed
         // TODO add your handling code here:
@@ -441,7 +451,20 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
 
     private void JT_AñoMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JT_AñoMateriaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JT_AñoMateriaActionPerformed
+    }//GEN-LAST:event_JT_AñoMateriaActionPerforme
+    private void opcionSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionSalirActionPerformed
+        int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "¿Estás seguro de que quieres cerrar la aplicación?",
+            "Confirmar Cierre",
+            JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            // Cierra la aplicación
+            System.exit(0);
+        }
+    }//GEN-LAST:event_opcionSalirActionPerformed
 
     /**
      * @param args the command line arguments
