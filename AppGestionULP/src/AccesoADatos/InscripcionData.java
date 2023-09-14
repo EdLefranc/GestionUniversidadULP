@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class InscripcionData {
     private Connection con;
+    
     //private MateriaData matData;
     //private AlumnoData aluData;
     
@@ -40,13 +41,13 @@ public class InscripcionData {
     
     
     public List <Materia> obtenerMateriasCursadas(int id){
-        List<Materia> materias = new ArrayList<>();
+        Conexion conn = new Conexion();
+        List<Materia> materias = new ArrayList<>();        
         
         try {
-            String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion,"
-                    + " materia WHERE inscripcion.idMateria = materia.idMateria\n"
-                    + "AND inscripcion.idAlumno = ?;";
-            try (PreparedStatement ps = con.prepareStatement(sql)) {
+            String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion, materia WHERE inscripcion.idMateria = materia.idMateria AND inscripcion.idAlumno = ?;";
+            String otraFormaSQL = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion JOIN materia ON(inscripcion.idMateria = materia.idMateria) WHERE inscripcion.idAlumno = ?;";
+            try (PreparedStatement ps = conn.Conexion_Maria().prepareStatement(otraFormaSQL)) {
                 ps.setInt(1, id);
                 ResultSet rs = ps.executeQuery();
                 Materia materia;
@@ -56,17 +57,20 @@ public class InscripcionData {
                     materia.setId_materia(rs.getInt("idMateria"));
                     materia.setNombre(rs.getString("nombre"));
                     materia.setAnio_materia(rs.getInt("año"));
-                    materias.add(materia);
-                    
+                    materias.add(materia);                    
                 }
             }
             
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al obtener las inscripciones. Error: " + e);
         }
+        System.out.println(materias);
         return materias;
     }
-    List <Materia> obtenerMateriasNoCursadas;
+    public List <Materia> obtenerMateriasNoCursadas(){
+        return null;
+        
+    }
     
     public void borrarInscripcionMateriaAlumno(int idAlumno, int idMateria){
         
