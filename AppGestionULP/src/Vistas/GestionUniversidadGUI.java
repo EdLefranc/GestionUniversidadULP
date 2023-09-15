@@ -62,24 +62,21 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         JT_NombreMateria = new javax.swing.JTextField();
         JT_AñoMateria = new javax.swing.JTextField();
         IF_Administracion = new javax.swing.JInternalFrame();
+        jLabel17 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        CB_SeleccionAlumno = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel14 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        RB_MateriasInsc = new javax.swing.JRadioButton();
+        RB_MateriasNoInsc = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Tabla_Inscripcion = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
+        Tabla_Inscripciones = new javax.swing.JTable();
+        BTN_Inscripcion = new javax.swing.JButton();
+        BTN_AnularInsc = new javax.swing.JButton();
         IF_Consultas = new javax.swing.JInternalFrame();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         SP_Tabla = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        btn_Salir_Consults = new javax.swing.JButton();
         CB_Seleccion_Materia = new javax.swing.JComboBox<>();
         Menu_Nav = new javax.swing.JMenuBar();
         JM_Alumno = new javax.swing.JMenu();
@@ -108,6 +105,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         IF_Alumno.setPreferredSize(new java.awt.Dimension(800, 600));
         IF_Alumno.setVisible(true);
 
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Alumno");
 
         jLabel2.setText("DNI");
@@ -170,7 +168,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                         .addComponent(btn_Eliminar_Alumno)
                         .addGap(18, 18, 18)
                         .addComponent(btn_Guardar_Alumno)))
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         IF_AlumnoLayout.setVerticalGroup(
             IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,7 +199,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addComponent(JDC_FechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Eliminar_Alumno)
                     .addComponent(btn_Nuevo_Alumno)
@@ -347,39 +345,32 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         IF_Administracion.setClosable(true);
         IF_Administracion.setIconifiable(true);
         IF_Administracion.setMaximizable(true);
-        IF_Administracion.setPreferredSize(new java.awt.Dimension(450, 450));
+        IF_Administracion.setTitle("Formulario de Inscripciones");
+        IF_Administracion.setPreferredSize(new java.awt.Dimension(630, 475));
         IF_Administracion.setVisible(true);
+        IF_Administracion.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel12.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel12.setText("Formulario de Inscripcion");
-        IF_Administracion.getContentPane().add(jLabel12);
+        jLabel17.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel17.setText("Formulario de Incripciones");
+        IF_Administracion.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, -1, -1));
 
-        jLabel13.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel13.setText("Seleccione un alumno:");
-        IF_Administracion.getContentPane().add(jLabel13);
+        jLabel12.setText("Seleccione un Alumno");
+        IF_Administracion.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, 30));
 
-        jComboBox1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-        IF_Administracion.getContentPane().add(jComboBox1);
+        CB_SeleccionAlumno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        IF_Administracion.getContentPane().add(CB_SeleccionAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 190, 30));
 
-        jLabel14.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel14.setText("Listado de Materias");
-        IF_Administracion.getContentPane().add(jLabel14);
+        jLabel13.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel13.setText("Listado de Materias");
+        IF_Administracion.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, -1, -1));
 
-        jRadioButton1.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        jRadioButton1.setText("Materias Inscriptas");
-        IF_Administracion.getContentPane().add(jRadioButton1);
+        RB_MateriasInsc.setText("Materias Inscriptas");
+        IF_Administracion.getContentPane().add(RB_MateriasInsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, -1, -1));
 
-        jRadioButton2.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        jRadioButton2.setText("Materias no Inscriptas");
-        IF_Administracion.getContentPane().add(jRadioButton2);
+        RB_MateriasNoInsc.setText("Materias no Inscriptas");
+        IF_Administracion.getContentPane().add(RB_MateriasNoInsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, -1, -1));
 
-        Tabla_Inscripcion.setModel(new javax.swing.table.DefaultTableModel(
+        Tabla_Inscripciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -390,37 +381,32 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(Tabla_Inscripcion);
+        jScrollPane1.setViewportView(Tabla_Inscripciones);
 
-        IF_Administracion.getContentPane().add(jScrollPane1);
+        IF_Administracion.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 580, 150));
 
-        jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton1.setText("Inscribir");
-        IF_Administracion.getContentPane().add(jButton1);
+        BTN_Inscripcion.setText("Inscripción");
+        IF_Administracion.getContentPane().add(BTN_Inscripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 400, -1, -1));
 
-        jButton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton2.setText("Anular Inscripcion");
-        IF_Administracion.getContentPane().add(jButton2);
+        BTN_AnularInsc.setText("Anular Inscripción");
+        IF_Administracion.getContentPane().add(BTN_AnularInsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, -1, -1));
 
-        jButton3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton3.setText("Salir");
-        IF_Administracion.getContentPane().add(jButton3);
-        IF_Administracion.getContentPane().add(jSeparator1);
-
-        jDesktopPane1.add(IF_Administracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 400));
+        jDesktopPane1.add(IF_Administracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         IF_Consultas.setClosable(true);
         IF_Consultas.setIconifiable(true);
         IF_Consultas.setMaximizable(true);
         IF_Consultas.setTitle("Consulta Alumnos por Materia");
+        IF_Consultas.setPreferredSize(new java.awt.Dimension(550, 550));
         IF_Consultas.setVisible(true);
+        IF_Consultas.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel15.setText("Seleccione una materia:");
-        IF_Consultas.getContentPane().add(jLabel15);
+        IF_Consultas.getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 140, 32));
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel16.setText("Listado de Alumnos por Materia");
-        IF_Consultas.getContentPane().add(jLabel16);
+        IF_Consultas.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 370, -1));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -447,20 +433,12 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         });
         SP_Tabla.setViewportView(jTable2);
 
-        IF_Consultas.getContentPane().add(SP_Tabla);
-
-        btn_Salir_Consults.setText("Salir");
-        btn_Salir_Consults.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salir(evt);
-            }
-        });
-        IF_Consultas.getContentPane().add(btn_Salir_Consults);
+        IF_Consultas.getContentPane().add(SP_Tabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 410, 150));
 
         CB_Seleccion_Materia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        IF_Consultas.getContentPane().add(CB_Seleccion_Materia);
+        IF_Consultas.getContentPane().add(CB_Seleccion_Materia, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 180, 32));
 
-        jDesktopPane1.add(IF_Consultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 400));
+        jDesktopPane1.add(IF_Consultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(jDesktopPane1);
 
@@ -506,6 +484,11 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         JM_Salir.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
         opcionSalir.setText("Salir de la Aplicación");
+        opcionSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opcionSalirActionPerformed(evt);
+            }
+        });
         JM_Salir.add(opcionSalir);
 
         Menu_Nav.add(JM_Salir);
@@ -520,14 +503,6 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_form_alumnoActionPerformed
 
 
-    private void salir(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salir
-        // TODO add your handling code here:
-    }//GEN-LAST:event_salir
-
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
     private void JT_CodigoMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JT_CodigoMateriaActionPerformed
@@ -605,6 +580,9 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTN_AnularInsc;
+    private javax.swing.JButton BTN_Inscripcion;
+    private javax.swing.JComboBox<String> CB_SeleccionAlumno;
     private javax.swing.JComboBox<String> CB_Seleccion_Materia;
     private javax.swing.JInternalFrame IF_Administracion;
     private javax.swing.JInternalFrame IF_Alumno;
@@ -625,8 +603,10 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar Menu_Nav;
     private javax.swing.JRadioButton RB_Activo;
     private javax.swing.JRadioButton RB_Activo_Materia;
+    private javax.swing.JRadioButton RB_MateriasInsc;
+    private javax.swing.JRadioButton RB_MateriasNoInsc;
     private javax.swing.JScrollPane SP_Tabla;
-    private javax.swing.JTable Tabla_Inscripcion;
+    private javax.swing.JTable Tabla_Inscripciones;
     private javax.swing.JButton btn_Buscar;
     private javax.swing.JButton btn_Buscar_Cod_Materia;
     private javax.swing.JButton btn_Eliminar_Alumno;
@@ -635,26 +615,21 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JButton btn_Guardar_Materia;
     private javax.swing.JButton btn_Nuevo_Alumno;
     private javax.swing.JButton btn_Nuevo_Materia;
-    private javax.swing.JButton btn_Salir_Consults;
     private javax.swing.JButton btn_Salir_Materia;
     private javax.swing.JMenuItem consulta_alumMaterias;
     private javax.swing.JMenuItem form_alumno;
     private javax.swing.JMenuItem form_manejoInscripciones;
     private javax.swing.JMenuItem form_materia;
     private javax.swing.JMenuItem form_modNotas;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -663,10 +638,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable2;
     private javax.swing.JMenuItem opcionSalir;
     // End of variables declaration//GEN-END:variables
