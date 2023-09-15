@@ -18,7 +18,6 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
      */
     public GestionUniversidadGUI() {
         initComponents();
-        setLocationRelativeTo(null);
     }
 
     /**
@@ -63,19 +62,22 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         JT_NombreMateria = new javax.swing.JTextField();
         JT_AñoMateria = new javax.swing.JTextField();
         IF_Administracion = new javax.swing.JInternalFrame();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel9 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        CB_SeleccionAlumno = new javax.swing.JComboBox<>();
+        jLabel13 = new javax.swing.JLabel();
+        RB_MateriasInsc = new javax.swing.JRadioButton();
+        RB_MateriasNoInsc = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
+        Tabla_Inscripciones = new javax.swing.JTable();
+        BTN_Inscripcion = new javax.swing.JButton();
+        BTN_AnularInsc = new javax.swing.JButton();
         IF_Consultas = new javax.swing.JInternalFrame();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        SP_Tabla = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        CB_Seleccion_Materia = new javax.swing.JComboBox<>();
         Menu_Nav = new javax.swing.JMenuBar();
         JM_Alumno = new javax.swing.JMenu();
         form_alumno = new javax.swing.JMenuItem();
@@ -103,7 +105,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         IF_Alumno.setPreferredSize(new java.awt.Dimension(800, 600));
         IF_Alumno.setVisible(true);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Alumno");
 
         jLabel2.setText("DNI");
@@ -166,7 +168,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                         .addComponent(btn_Eliminar_Alumno)
                         .addGap(18, 18, 18)
                         .addComponent(btn_Guardar_Alumno)))
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         IF_AlumnoLayout.setVerticalGroup(
             IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,7 +199,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addComponent(JDC_FechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Eliminar_Alumno)
                     .addComponent(btn_Nuevo_Alumno)
@@ -343,33 +345,32 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         IF_Administracion.setClosable(true);
         IF_Administracion.setIconifiable(true);
         IF_Administracion.setMaximizable(true);
-        IF_Administracion.setPreferredSize(new java.awt.Dimension(450, 450));
+        IF_Administracion.setTitle("Formulario de Inscripciones");
+        IF_Administracion.setPreferredSize(new java.awt.Dimension(630, 475));
         IF_Administracion.setVisible(true);
+        IF_Administracion.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel7.setText("Formulario de Inscripcion");
+        jLabel17.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel17.setText("Formulario de Incripciones");
+        IF_Administracion.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel8.setText("Seleccione un alumno:");
+        jLabel12.setText("Seleccione un Alumno");
+        IF_Administracion.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, 30));
 
-        jComboBox1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
+        CB_SeleccionAlumno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        IF_Administracion.getContentPane().add(CB_SeleccionAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 190, 30));
 
-        jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel9.setText("Listado de Materias");
+        jLabel13.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel13.setText("Listado de Materias");
+        IF_Administracion.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, -1, -1));
 
-        jRadioButton1.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        jRadioButton1.setText("Materias Inscriptas");
+        RB_MateriasInsc.setText("Materias Inscriptas");
+        IF_Administracion.getContentPane().add(RB_MateriasInsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, -1, -1));
 
-        jRadioButton2.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        jRadioButton2.setText("Materias no Inscriptas");
+        RB_MateriasNoInsc.setText("Materias no Inscriptas");
+        IF_Administracion.getContentPane().add(RB_MateriasNoInsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Tabla_Inscripciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -380,103 +381,64 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(Tabla_Inscripciones);
 
-        jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton1.setText("Inscribir");
+        IF_Administracion.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 580, 150));
 
-        jButton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton2.setText("Anular Inscripcion");
+        BTN_Inscripcion.setText("Inscripción");
+        IF_Administracion.getContentPane().add(BTN_Inscripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 400, -1, -1));
 
-        jButton3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton3.setText("Salir");
+        BTN_AnularInsc.setText("Anular Inscripción");
+        IF_Administracion.getContentPane().add(BTN_AnularInsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, -1, -1));
 
-        javax.swing.GroupLayout IF_AdministracionLayout = new javax.swing.GroupLayout(IF_Administracion.getContentPane());
-        IF_Administracion.getContentPane().setLayout(IF_AdministracionLayout);
-        IF_AdministracionLayout.setHorizontalGroup(
-            IF_AdministracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IF_AdministracionLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addGap(130, 130, 130))
-            .addGroup(IF_AdministracionLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jButton1)
-                .addGap(67, 67, 67)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(28, 28, 28))
-            .addGroup(IF_AdministracionLayout.createSequentialGroup()
-                .addGroup(IF_AdministracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(IF_AdministracionLayout.createSequentialGroup()
-                        .addGap(158, 158, 158)
-                        .addComponent(jLabel9))
-                    .addGroup(IF_AdministracionLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel8)
-                        .addGap(41, 41, 41)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(IF_AdministracionLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(IF_AdministracionLayout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(jRadioButton1)
-                        .addGap(28, 28, 28)
-                        .addComponent(jRadioButton2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IF_AdministracionLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        IF_AdministracionLayout.setVerticalGroup(
-            IF_AdministracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(IF_AdministracionLayout.createSequentialGroup()
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addGroup(IF_AdministracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addComponent(jLabel9)
-                .addGap(31, 31, 31)
-                .addGroup(IF_AdministracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addGroup(IF_AdministracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addGap(0, 41, Short.MAX_VALUE))
-        );
-
-        jDesktopPane1.add(IF_Administracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 400));
+        jDesktopPane1.add(IF_Administracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         IF_Consultas.setClosable(true);
         IF_Consultas.setIconifiable(true);
         IF_Consultas.setMaximizable(true);
         IF_Consultas.setTitle("Consulta Alumnos por Materia");
+        IF_Consultas.setPreferredSize(new java.awt.Dimension(550, 550));
         IF_Consultas.setVisible(true);
+        IF_Consultas.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout IF_ConsultasLayout = new javax.swing.GroupLayout(IF_Consultas.getContentPane());
-        IF_Consultas.getContentPane().setLayout(IF_ConsultasLayout);
-        IF_ConsultasLayout.setHorizontalGroup(
-            IF_ConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        IF_ConsultasLayout.setVerticalGroup(
-            IF_ConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        jLabel15.setText("Seleccione una materia:");
+        IF_Consultas.getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 140, 32));
 
-        jDesktopPane1.add(IF_Consultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 400));
+        jLabel16.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel16.setText("Listado de Alumnos por Materia");
+        IF_Consultas.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 370, -1));
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "DNI", "Apellido", "Nombre"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        SP_Tabla.setViewportView(jTable2);
+
+        IF_Consultas.getContentPane().add(SP_Tabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 410, 150));
+
+        CB_Seleccion_Materia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        IF_Consultas.getContentPane().add(CB_Seleccion_Materia, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 180, 32));
+
+        jDesktopPane1.add(IF_Consultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(jDesktopPane1);
 
@@ -541,9 +503,6 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_form_alumnoActionPerformed
 
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
     private void JT_CodigoMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JT_CodigoMateriaActionPerformed
@@ -566,9 +525,9 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_Salir_MateriaActionPerformed
 
-    private void JT_AñoMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JT_AñoMateriaActionPerformed
+    private void JT_AñoMateriaActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
-    }//GEN-LAST:event_JT_AñoMateriaActionPerforme
+    }                                            
     private void opcionSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionSalirActionPerformed
         int confirm = JOptionPane.showConfirmDialog(
             this,
@@ -582,6 +541,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
             System.exit(0);
         }
     }//GEN-LAST:event_opcionSalirActionPerformed
+
 
 
     /**
@@ -620,6 +580,10 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTN_AnularInsc;
+    private javax.swing.JButton BTN_Inscripcion;
+    private javax.swing.JComboBox<String> CB_SeleccionAlumno;
+    private javax.swing.JComboBox<String> CB_Seleccion_Materia;
     private javax.swing.JInternalFrame IF_Administracion;
     private javax.swing.JInternalFrame IF_Alumno;
     private javax.swing.JInternalFrame IF_Consultas;
@@ -639,6 +603,10 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar Menu_Nav;
     private javax.swing.JRadioButton RB_Activo;
     private javax.swing.JRadioButton RB_Activo_Materia;
+    private javax.swing.JRadioButton RB_MateriasInsc;
+    private javax.swing.JRadioButton RB_MateriasNoInsc;
+    private javax.swing.JScrollPane SP_Tabla;
+    private javax.swing.JTable Tabla_Inscripciones;
     private javax.swing.JButton btn_Buscar;
     private javax.swing.JButton btn_Buscar_Cod_Materia;
     private javax.swing.JButton btn_Eliminar_Alumno;
@@ -653,14 +621,15 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem form_manejoInscripciones;
     private javax.swing.JMenuItem form_materia;
     private javax.swing.JMenuItem form_modNotas;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -669,13 +638,8 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
-
+    private javax.swing.JTable jTable2;
     private javax.swing.JMenuItem opcionSalir;
     // End of variables declaration//GEN-END:variables
 }
