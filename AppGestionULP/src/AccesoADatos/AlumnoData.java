@@ -175,7 +175,8 @@ public class AlumnoData {
     public void eliminarAlumno(int id) {
         try {
         String sql = "UPDATE alumno SET estado = 0 WHERE idAlumno = ? ";
-        PreparedStatement ps = con.prepareStatement(sql);
+        PreparedStatement ps = conex.Conexion_Maria().prepareStatement(sql);
+        //PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, id);
         int fila=ps.executeUpdate();
         

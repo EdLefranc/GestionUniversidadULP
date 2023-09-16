@@ -102,7 +102,8 @@ String sql = "UPDATE materia SET nombre = ?, año = ? WHERE idMateria = ?";
     public void eliminarmateria(int id) {
         try {
         String sql = "UPDATE materia SET estado = 0 WHERE idMateria = ? ";
-        PreparedStatement ps = con.prepareStatement(sql);
+        PreparedStatement ps = conex.Conexion_Maria().prepareStatement(sql);
+        //PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, id);
         int fila=ps.executeUpdate();
         
