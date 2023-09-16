@@ -351,8 +351,8 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         IF_Administracion.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel17.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel17.setText("Formulario de Incripciones");
-        IF_Administracion.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, -1, -1));
+        jLabel17.setText("Formulario de Inscripciones");
+        IF_Administracion.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, -1));
 
         jLabel12.setText("Seleccione un Alumno");
         IF_Administracion.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, 30));

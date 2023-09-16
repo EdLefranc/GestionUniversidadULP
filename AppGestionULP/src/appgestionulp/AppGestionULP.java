@@ -44,7 +44,10 @@ public class AppGestionULP {
         //dataAlumno.guardarAlumno(a1);
         //dataAlumno.buscarAlumno(7);
         //dataAlumno.buscarAlumnoPorDni(28222113);
-        dataAlumno.listarAlumnos();
+        //dataAlumno.listarAlumnos();
+        //insc.obtenerInscripciones();
+        //insc.obtenerInscripcionesPorAlumno(4);
+        insc.obtenerMateriasNoCursadas();
     }
 }
         
