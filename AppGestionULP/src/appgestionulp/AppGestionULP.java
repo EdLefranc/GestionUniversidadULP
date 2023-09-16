@@ -8,6 +8,7 @@ package appgestionulp;
 import AccesoADatos.AlumnoData;
 import AccesoADatos.Conexion;
 import AccesoADatos.InscripcionData;
+import AccesoADatos.MateriaData;
 import Entidades.Alumno;
 import Entidades.Materia;
 import java.sql.Date;
@@ -35,16 +36,24 @@ public class AppGestionULP {
         Conexion conn = new Conexion();
         InscripcionData insc = new InscripcionData();
         AlumnoData dataAlumno = new AlumnoData();
+        MateriaData dataMateria = new MateriaData();
         
         //instanciamos un objeto de tipo Alumno
         LocalDate fecha = LocalDate.of(2006, 5, 5);       
         Alumno a1 = new Alumno(35200321, "Juan", "Quinteros", fecha, true);
         
+        Materia mat1 = new Materia("costos", 2 ,true ); 
+        
         //insc.obtenerMateriasCursadas(4);
         //dataAlumno.guardarAlumno(a1);
         //dataAlumno.buscarAlumno(7);
         //dataAlumno.buscarAlumnoPorDni(28222113);
-        dataAlumno.listarAlumnos();
+        //dataAlumno.listarAlumnos();
+        
+        //dataMateria.guardarMateria(mat1);
+        //dataMateria.buscarMateria(3);
+        dataMateria.modificarMateria(mat1);
+        
     }
 }
         
