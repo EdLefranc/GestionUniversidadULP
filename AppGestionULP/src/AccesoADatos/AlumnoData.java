@@ -4,6 +4,7 @@ package AccesoADatos;
 
 import AccesoADatos.Conexion;
 import Entidades.Alumno;
+import Vistas.GestionUniversidadGUI;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -16,6 +17,8 @@ import javax.swing.JOptionPane;
 
 
 public class AlumnoData {
+    
+    GestionUniversidadGUI interfaz = new GestionUniversidadGUI();
     
     private Connection con = null;
     Conexion conex = new Conexion();
@@ -50,8 +53,8 @@ public class AlumnoData {
 
 }
     }
-
-
+    
+    
     public Alumno buscarAlumno(int id) throws SQLException {
         Alumno alumno = null;
         String sql = "SELECT dni, apellido, nombre, fechaNacimiento FROM alumno WHERE idAlumno = ? AND estado = 1";
