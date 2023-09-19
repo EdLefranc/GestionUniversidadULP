@@ -196,13 +196,44 @@ public class InscripcionData {
     
     public void borrarInscripcionMateriaAlumno(int idAlumno, int idMateria){
         
+        
+        
     }
     
     public void actualizarNota(int idMateria, double nota){
         
     }
     
-    public List <Alumno> obtenerAlumnoPorMateria(){
-        return null;
+    public List <Alumno> obtenerAlumnoPorMateria(int id){
+       
+       Conexion conn = new Conexion(); 
+       List<Alumno> alumnos = new ArrayList<>();
+        try {
+        String sql = "SELECT inscripcion.idMateria, dni, apellido, nombre FROM materia, alumno WHERE inscripcion.idMateria = materia.idMateria AND materia.idMateria = ?;";
+        PreparedStatement ps = conn.Conexion_Maria().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Alumno alumno = new Alumno();
+
+            alumno.setId_alumno(rs.getInt("idAlumno"));
+            alumno.setDni(rs.getInt("dni"));
+            alumno.setApellido(rs.getString("apellido"));
+            alumno.setNombre(rs.getString("nombre"));
+            
+            alumnos.add(alumno);
+            
+            
+        }
+        ps.close();        
+        
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno "+ex.getMessage());
+        }
+        System.out.println(alumnos);
+        return alumnos;
     }
+        
+       
+        
+    
 }

@@ -36,11 +36,16 @@ public class AppGestionULP {
         Conexion conn = new Conexion();
         InscripcionData insc = new InscripcionData();
         AlumnoData dataAlumno = new AlumnoData();
-        MateriaData matData = new MateriaData();
+
+        MateriaData dataMateria = new MateriaData();
         
         //instanciamos un objeto de tipo Alumno
         LocalDate fecha = LocalDate.of(2006, 5, 5);       
-        Alumno a1 = new Alumno(35200321, "Juan", "Quinteros", fecha, true);
+        Alumno a1 = new Alumno(3, 35200321, "Juan", "Quinteros", fecha, false);
+        
+        Materia mat1 = new Materia(7,"Sistemas II", 2 , true ); 
+        
+        
         
         String nombre = "Scrum";
         
@@ -50,11 +55,23 @@ public class AppGestionULP {
         dataAlumno.guardarAlumno(a1);
         //dataAlumno.buscarAlumno(7);
         //dataAlumno.buscarAlumnoPorDni(28222113);
+
         //dataAlumno.listarAlumnos();
         //insc.obtenerInscripciones();
         //insc.obtenerInscripcionesPorAlumno(4);
         //insc.obtenerMateriasNoCursadas();
         //matData.modificarMateria(mat);
+
+        //dataAlumno.modificarAlumno(a1);
+        //dataAlumno.listarAlumnos();
+        //dataAlumno.eliminarAlumno(1);
+        
+        //dataMateria.guardarMateria(mat1);
+        //dataMateria.buscarMateria(3);
+        //dataMateria.eliminarmateria(6);
+        //dataMateria.listarMaterias();
+        //dataMateria.modificarMateria(mat1);
+
     }
 }
         
