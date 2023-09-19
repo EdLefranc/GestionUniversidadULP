@@ -5,19 +5,34 @@
  */
 package Vistas;
 
+import AccesoADatos.AlumnoData;
+import Entidades.Alumno;
+import Entidades.Inscripcion;
+import Entidades.Materia;
+//import java.time.LocalDate;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+//import com.toedter.calendar.JDateChooser;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
+
 
 /**
  *
  * @author Ed Le Franc
  */
-public class GestionUniversidadGUI extends javax.swing.JFrame {
-
+public class GestionUniversidadGUI extends javax.swing.JFrame {   
+//    AlumnoData alumData = new AlumnoData();
+//    Materia mat = new Materia();
+//    Inscripcion insc = new Inscripcion();
     /**
      * Creates new form GestionUniversidadGUI
      */
     public GestionUniversidadGUI() {
         initComponents();
+        setLocationRelativeTo(null); // Esto setea la posición de la ventana principal de la app en el centro de la pantalla
+        eliminarInternalFrames();
     }
 
     /**
@@ -29,6 +44,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jProgressBar1 = new javax.swing.JProgressBar();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         IF_Alumno = new javax.swing.JInternalFrame();
         jLabel1 = new javax.swing.JLabel();
@@ -95,137 +111,100 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         jDesktopPane1.setPreferredSize(new java.awt.Dimension(800, 600));
-        jDesktopPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jDesktopPane1.setLayout(new java.awt.BorderLayout());
 
         IF_Alumno.setClosable(true);
-        IF_Alumno.setIconifiable(true);
-        IF_Alumno.setMaximizable(true);
-        IF_Alumno.setResizable(true);
         IF_Alumno.setTitle("Formulario de  Alumno");
         IF_Alumno.setPreferredSize(new java.awt.Dimension(800, 600));
         IF_Alumno.setVisible(true);
+        IF_Alumno.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel1.setText("Alumno");
+        IF_Alumno.getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("DNI");
+        IF_Alumno.getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel3.setText("Apellido");
+        IF_Alumno.getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel4.setText("Nombre");
+        IF_Alumno.getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, -1, -1));
 
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel5.setText("Estado");
+        IF_Alumno.getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, -1, -1));
 
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel6.setText("Fecha de nacimiento");
+        IF_Alumno.getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 380, -1, -1));
+        IF_Alumno.getContentPane().add(JT_Dni, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 154, -1));
+        IF_Alumno.getContentPane().add(JT_Apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, 272, -1));
+        IF_Alumno.getContentPane().add(JT_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 280, 272, -1));
 
+        btn_Buscar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btn_Buscar.setText("Buscar");
+        IF_Alumno.getContentPane().add(btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 160, -1, -1));
 
+        RB_Activo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         RB_Activo.setText("Activo");
+        IF_Alumno.getContentPane().add(RB_Activo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, -1, -1));
+        IF_Alumno.getContentPane().add(JDC_FechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, 313, -1));
 
+        btn_Guardar_Alumno.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btn_Guardar_Alumno.setText("Guardar");
+        btn_Guardar_Alumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Guardar_AlumnoActionPerformed(evt);
+            }
+        });
+        IF_Alumno.getContentPane().add(btn_Guardar_Alumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 480, -1, -1));
 
+        btn_Nuevo_Alumno.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btn_Nuevo_Alumno.setText("Nuevo");
+        btn_Nuevo_Alumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Nuevo_AlumnoActionPerformed(evt);
+            }
+        });
+        IF_Alumno.getContentPane().add(btn_Nuevo_Alumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 480, -1, -1));
 
+        btn_Eliminar_Alumno.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btn_Eliminar_Alumno.setText("Eliminar");
+        btn_Eliminar_Alumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Eliminar_AlumnoActionPerformed(evt);
+            }
+        });
+        IF_Alumno.getContentPane().add(btn_Eliminar_Alumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 480, -1, -1));
 
-        javax.swing.GroupLayout IF_AlumnoLayout = new javax.swing.GroupLayout(IF_Alumno.getContentPane());
-        IF_Alumno.getContentPane().setLayout(IF_AlumnoLayout);
-        IF_AlumnoLayout.setHorizontalGroup(
-            IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(IF_AlumnoLayout.createSequentialGroup()
-                .addGroup(IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(IF_AlumnoLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(IF_AlumnoLayout.createSequentialGroup()
-                                .addGroup(IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IF_AlumnoLayout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(35, 35, 35))
-                                    .addGroup(IF_AlumnoLayout.createSequentialGroup()
-                                        .addGroup(IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel5))
-                                        .addGap(107, 107, 107)))
-                                .addGroup(IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(IF_AlumnoLayout.createSequentialGroup()
-                                        .addComponent(JT_Dni, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(27, 27, 27)
-                                        .addComponent(btn_Buscar))
-                                    .addComponent(JT_Apellido, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(RB_Activo)
-                                    .addComponent(JT_Nombre, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(JDC_FechaNac, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(IF_AlumnoLayout.createSequentialGroup()
-                                .addGap(172, 172, 172)
-                                .addComponent(jLabel1))))
-                    .addGroup(IF_AlumnoLayout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(btn_Nuevo_Alumno)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_Eliminar_Alumno)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_Guardar_Alumno)))
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
-        IF_AlumnoLayout.setVerticalGroup(
-            IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(IF_AlumnoLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
-                    .addGroup(IF_AlumnoLayout.createSequentialGroup()
-                        .addGroup(IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(IF_AlumnoLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(32, 32, 32)
-                                .addGroup(IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(JT_Dni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btn_Buscar)
-                                    .addComponent(jLabel2))
-                                .addGap(53, 53, 53))
-                            .addGroup(IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(JT_Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3)))
-                        .addGap(23, 23, 23)
-                        .addGroup(IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(JT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(22, 22, 22)
-                        .addGroup(IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(RB_Activo)
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
-                        .addComponent(JDC_FechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addGroup(IF_AlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_Eliminar_Alumno)
-                    .addComponent(btn_Nuevo_Alumno)
-                    .addComponent(btn_Guardar_Alumno))
-                .addGap(31, 31, 31))
-        );
-
-        jDesktopPane1.add(IF_Alumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 440));
+        jDesktopPane1.add(IF_Alumno, java.awt.BorderLayout.SOUTH);
 
         IF_Materia.setClosable(true);
-        IF_Materia.setIconifiable(true);
-        IF_Materia.setMaximizable(true);
         IF_Materia.setTitle("Formulario de Materias");
+        IF_Materia.setPreferredSize(new java.awt.Dimension(800, 600));
         IF_Materia.setVisible(true);
 
-        jLabel7.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel7.setText("Materia");
 
+        jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel8.setText("Código:");
 
+        jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel9.setText("Nombre:");
 
+        jLabel10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel10.setText("Año:");
 
+        jLabel11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel11.setText("Estado:");
 
+        RB_Activo_Materia.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         RB_Activo_Materia.setText("Activo");
 
         JT_CodigoMateria.addActionListener(new java.awt.event.ActionListener() {
@@ -234,8 +213,10 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
             }
         });
 
+        btn_Buscar_Cod_Materia.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btn_Buscar_Cod_Materia.setText("Buscar");
 
+        btn_Nuevo_Materia.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btn_Nuevo_Materia.setText("Nuevo");
         btn_Nuevo_Materia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -243,6 +224,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
             }
         });
 
+        btn_Eliminar_Materia.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btn_Eliminar_Materia.setText("Eliminar");
         btn_Eliminar_Materia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,6 +232,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
             }
         });
 
+        btn_Guardar_Materia.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btn_Guardar_Materia.setText("Guardar");
         btn_Guardar_Materia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,6 +240,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
             }
         });
 
+        btn_Salir_Materia.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btn_Salir_Materia.setText("Salir");
         btn_Salir_Materia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -275,100 +259,111 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         IF_MateriaLayout.setHorizontalGroup(
             IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(IF_MateriaLayout.createSequentialGroup()
+                .addGap(131, 131, 131)
                 .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(IF_MateriaLayout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(IF_MateriaLayout.createSequentialGroup()
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JT_CodigoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(btn_Buscar_Cod_Materia))
-                            .addGroup(IF_MateriaLayout.createSequentialGroup()
-                                .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel11))
-                                .addGap(18, 18, 18)
-                                .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(JT_AñoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(JT_NombreMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(RB_Activo_Materia)))))
-                    .addGroup(IF_MateriaLayout.createSequentialGroup()
-                        .addGap(84, 84, 84)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IF_MateriaLayout.createSequentialGroup()
                         .addComponent(btn_Nuevo_Materia)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(49, 49, 49)
                         .addComponent(btn_Eliminar_Materia)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(60, 60, 60)
                         .addComponent(btn_Guardar_Materia)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_Salir_Materia))
-                    .addGroup(IF_MateriaLayout.createSequentialGroup()
-                        .addGap(178, 178, 178)
-                        .addComponent(jLabel7)))
-                .addContainerGap(113, Short.MAX_VALUE))
+                        .addGap(121, 121, 121))
+                    .addComponent(btn_Salir_Materia, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(IF_MateriaLayout.createSequentialGroup()
+                            .addComponent(jLabel9)
+                            .addGap(65, 65, 65)
+                            .addComponent(JT_CodigoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(30, 30, 30)
+                            .addComponent(btn_Buscar_Cod_Materia))
+                        .addGroup(IF_MateriaLayout.createSequentialGroup()
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(65, 65, 65)
+                            .addComponent(JT_NombreMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(IF_MateriaLayout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel11)
+                                .addGroup(IF_MateriaLayout.createSequentialGroup()
+                                    .addComponent(jLabel10)
+                                    .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(IF_MateriaLayout.createSequentialGroup()
+                                            .addGap(90, 90, 90)
+                                            .addComponent(jLabel7)
+                                            .addGap(180, 180, 180))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IF_MateriaLayout.createSequentialGroup()
+                                            .addGap(58, 58, 58)
+                                            .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(RB_Activo_Materia)
+                                                .addComponent(JT_AñoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(163, 163, 163))))))))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
         IF_MateriaLayout.setVerticalGroup(
             IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(IF_MateriaLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel7)
-                .addGap(38, 38, 38)
+                .addGap(69, 69, 69)
+                .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(IF_MateriaLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(JT_CodigoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_Buscar_Cod_Materia)))
+                .addGap(30, 30, 30)
                 .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(JT_CodigoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_Buscar_Cod_Materia))
+                    .addComponent(JT_NombreMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(JT_NombreMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                    .addComponent(JT_AñoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addGap(28, 28, 28)
                 .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(JT_AñoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(RB_Activo_Materia))
-                .addGap(33, 33, 33)
+                    .addComponent(RB_Activo_Materia)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Nuevo_Materia)
                     .addComponent(btn_Eliminar_Materia)
                     .addComponent(btn_Guardar_Materia)
                     .addComponent(btn_Salir_Materia))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addGap(95, 95, 95))
         );
 
-        jDesktopPane1.add(IF_Materia, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 440));
+        jDesktopPane1.add(IF_Materia, java.awt.BorderLayout.EAST);
 
         IF_Administracion.setClosable(true);
-        IF_Administracion.setIconifiable(true);
-        IF_Administracion.setMaximizable(true);
         IF_Administracion.setTitle("Formulario de Inscripciones");
-        IF_Administracion.setPreferredSize(new java.awt.Dimension(630, 475));
+        IF_Administracion.setMinimumSize(new java.awt.Dimension(60, 22));
+        IF_Administracion.setPreferredSize(new java.awt.Dimension(800, 600));
         IF_Administracion.setVisible(true);
         IF_Administracion.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel17.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel17.setText("Formulario de Inscripciones");
-        IF_Administracion.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, -1));
+        IF_Administracion.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
 
+        jLabel12.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel12.setText("Seleccione un Alumno");
-        IF_Administracion.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, 30));
+        IF_Administracion.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, -1, 30));
 
         CB_SeleccionAlumno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        IF_Administracion.getContentPane().add(CB_SeleccionAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 190, 30));
+        IF_Administracion.getContentPane().add(CB_SeleccionAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, 190, 30));
 
-        jLabel13.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel13.setText("Listado de Materias");
-        IF_Administracion.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, -1, -1));
+        IF_Administracion.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, -1, -1));
 
+        RB_MateriasInsc.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         RB_MateriasInsc.setText("Materias Inscriptas");
-        IF_Administracion.getContentPane().add(RB_MateriasInsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, -1, -1));
+        IF_Administracion.getContentPane().add(RB_MateriasInsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, -1, -1));
 
+        RB_MateriasNoInsc.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         RB_MateriasNoInsc.setText("Materias no Inscriptas");
-        IF_Administracion.getContentPane().add(RB_MateriasNoInsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, -1, -1));
+        IF_Administracion.getContentPane().add(RB_MateriasNoInsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, -1, -1));
 
         Tabla_Inscripciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -383,30 +378,31 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(Tabla_Inscripciones);
 
-        IF_Administracion.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 580, 150));
+        IF_Administracion.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 740, 150));
 
+        BTN_Inscripcion.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         BTN_Inscripcion.setText("Inscripción");
-        IF_Administracion.getContentPane().add(BTN_Inscripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 400, -1, -1));
+        IF_Administracion.getContentPane().add(BTN_Inscripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 490, -1, -1));
 
+        BTN_AnularInsc.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         BTN_AnularInsc.setText("Anular Inscripción");
-        IF_Administracion.getContentPane().add(BTN_AnularInsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, -1, -1));
+        IF_Administracion.getContentPane().add(BTN_AnularInsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 490, -1, -1));
 
-        jDesktopPane1.add(IF_Administracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jDesktopPane1.add(IF_Administracion, java.awt.BorderLayout.WEST);
 
         IF_Consultas.setClosable(true);
-        IF_Consultas.setIconifiable(true);
-        IF_Consultas.setMaximizable(true);
         IF_Consultas.setTitle("Consulta Alumnos por Materia");
-        IF_Consultas.setPreferredSize(new java.awt.Dimension(550, 550));
+        IF_Consultas.setPreferredSize(new java.awt.Dimension(800, 600));
         IF_Consultas.setVisible(true);
         IF_Consultas.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel15.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel15.setText("Seleccione una materia:");
-        IF_Consultas.getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 140, 32));
+        IF_Consultas.getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 220, 32));
 
-        jLabel16.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel16.setText("Listado de Alumnos por Materia");
-        IF_Consultas.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 370, -1));
+        IF_Consultas.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, -1, -1));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -433,12 +429,12 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         });
         SP_Tabla.setViewportView(jTable2);
 
-        IF_Consultas.getContentPane().add(SP_Tabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 410, 150));
+        IF_Consultas.getContentPane().add(SP_Tabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 730, 230));
 
         CB_Seleccion_Materia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        IF_Consultas.getContentPane().add(CB_Seleccion_Materia, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 180, 32));
+        IF_Consultas.getContentPane().add(CB_Seleccion_Materia, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 180, 32));
 
-        jDesktopPane1.add(IF_Consultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jDesktopPane1.add(IF_Consultas, java.awt.BorderLayout.NORTH);
 
         getContentPane().add(jDesktopPane1);
 
@@ -459,6 +455,11 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         JM_Materia.setText("Materia");
 
         form_materia.setText("Formulario de Materia");
+        form_materia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                form_materiaActionPerformed(evt);
+            }
+        });
         JM_Materia.add(form_materia);
 
         Menu_Nav.add(JM_Materia);
@@ -466,6 +467,11 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         JM_Admin.setText("Administración");
 
         form_manejoInscripciones.setText("Manejo de Inscripciones");
+        form_manejoInscripciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                form_manejoInscripcionesActionPerformed(evt);
+            }
+        });
         JM_Admin.add(form_manejoInscripciones);
 
         form_modNotas.setText("Modificación de Notas");
@@ -476,6 +482,11 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         JM_Consultas.setText("Consultas");
 
         consulta_alumMaterias.setText("Alumnos por Materias");
+        consulta_alumMaterias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consulta_alumMateriasActionPerformed(evt);
+            }
+        });
         JM_Consultas.add(consulta_alumMaterias);
 
         Menu_Nav.add(JM_Consultas);
@@ -497,13 +508,32 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private void eliminarInternalFrames(){
+        IF_Administracion.setVisible(false);
+        IF_Alumno.setVisible(false);
+        IF_Consultas.setVisible(false);
+        IF_Materia.setVisible(false);
+    }
+    
+    private void mostrar_internalFrame(JInternalFrame Ventana, boolean visibilidad){
+        Ventana.setVisible(visibilidad);        
+    }
+    
     private void form_alumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_form_alumnoActionPerformed
-        // TODO add your handling code here:
+        eliminarInternalFrames();
+        IF_Alumno.setVisible(true);
+        
+        // Luego, cuando desees abrir la ventana interna:
+        if (IF_Alumno == null || IF_Alumno.isClosed()) {            
+            // Agregando la ventana interna al jDesktopPane1
+            jDesktopPane1.add(IF_Alumno);
+            IF_Alumno.setVisible(true); //hacerlo visible
+        }
+
+        // Me aseguro de manejar el evento de cierre para 'ocultar' en lugar de 'eliminar'
+        IF_Alumno.setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
     }//GEN-LAST:event_form_alumnoActionPerformed
-
-
-
 
     private void JT_CodigoMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JT_CodigoMateriaActionPerformed
         // TODO add your handling code here:
@@ -541,6 +571,78 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
             System.exit(0);
         }
     }//GEN-LAST:event_opcionSalirActionPerformed
+
+    private void form_materiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_form_materiaActionPerformed
+        eliminarInternalFrames();
+        IF_Materia.setVisible(true);
+        
+        // Luego, cuando desees abrir la ventana interna:
+        if (IF_Materia == null || IF_Materia.isClosed()) {            
+            // Agregando la ventana interna al jDesktopPane1
+            jDesktopPane1.add(IF_Materia);
+            IF_Materia.setVisible(true);
+        }
+
+        // Me aseguro de manejar el evento de cierre para 'ocultar' en lugar de 'eliminar'
+        IF_Materia.setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
+    }//GEN-LAST:event_form_materiaActionPerformed
+
+    private void form_manejoInscripcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_form_manejoInscripcionesActionPerformed
+        eliminarInternalFrames();
+        IF_Administracion.setVisible(true);
+        
+        // Luego, cuando desees abrir la ventana interna:
+        if (IF_Administracion == null || IF_Administracion.isClosed()) {            
+            // Agregando la ventana interna al jDesktopPane1
+            jDesktopPane1.add(IF_Administracion);
+            IF_Administracion.setVisible(true);
+        }
+
+        // Me aseguro de manejar el evento de cierre para 'ocultar' en lugar de 'eliminar'
+        IF_Administracion.setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
+    }//GEN-LAST:event_form_manejoInscripcionesActionPerformed
+
+    private void consulta_alumMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consulta_alumMateriasActionPerformed
+        eliminarInternalFrames();
+        IF_Consultas.setVisible(true);
+        
+        // Luego, cuando desees abrir la ventana interna:
+        if (IF_Consultas == null || IF_Consultas.isClosed()) {            
+            // Agregando la ventana interna al jDesktopPane1
+            jDesktopPane1.add(IF_Consultas);
+            IF_Consultas.setVisible(true);
+        }
+
+        // Me aseguro de manejar el evento de cierre para 'ocultar' en lugar de 'eliminar'
+        IF_Consultas.setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
+    }//GEN-LAST:event_consulta_alumMateriasActionPerformed
+
+    private void btn_Nuevo_AlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Nuevo_AlumnoActionPerformed
+        JT_Dni.setText("");
+        
+    }//GEN-LAST:event_btn_Nuevo_AlumnoActionPerformed
+
+    private void btn_Eliminar_AlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Eliminar_AlumnoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_Eliminar_AlumnoActionPerformed
+
+    private void btn_Guardar_AlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Guardar_AlumnoActionPerformed
+        AlumnoData alumData = new AlumnoData();       
+        
+            String dni = JT_Dni.getText();
+            String nombre = JT_Nombre.getText();
+            String apellido = JT_Apellido.getText();
+            Date fechaDCH = (Date) JDC_FechaNac.getDate(); // Casteamos el dato capturado a tipo Date.
+
+            // Convertir Date a LocalDate puuufff!!
+            LocalDate fechaNac = fechaDCH.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            boolean estado = true;
+
+            Alumno alum = new Alumno(Integer.parseInt(dni), nombre, apellido, fechaNac, estado);
+            
+            alumData.guardarAlumno(alum);    
+        
+    }//GEN-LAST:event_btn_Guardar_AlumnoActionPerformed
 
 
 
@@ -638,8 +740,39 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable2;
     private javax.swing.JMenuItem opcionSalir;
     // End of variables declaration//GEN-END:variables
 }
+
+
+/*
+
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+
+// ...
+
+private void btn_Nuevo_AlumnoActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+    String dni = JT_Dni.getText();
+    String nombre = JT_Nombre.getText();
+    String apellido = JT_Apellido.getText();
+    Date fechaDate = JDC_FechaNac.getDate(); // Obtenemos la fecha como Date
+    
+    // Convertimos Date a LocalDate
+    LocalDate fecha = fechaDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    
+    boolean estado = true;
+    
+    Alumno alum = new Alumno(Integer.parseInt(dni), nombre, apellido, fecha, estado);
+    alumData.guardarAlumno(alum);
+}
+
+
+
+
+*/
