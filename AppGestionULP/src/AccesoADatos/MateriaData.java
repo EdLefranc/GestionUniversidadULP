@@ -78,14 +78,16 @@ public Materia buscarMateria(int id) throws SQLException {
 
 
 public void modificarMateria (Materia materia){
-String sql = "UPDATE materia SET nombre = ?, año = ? WHERE idMateria = ?";
+String sql = "UPDATE materia SET nombre = ?, año = ?, estado = ? WHERE idMateria = ?";
         PreparedStatement ps = null;
         
         try {
         ps = conex.Conexion_Maria().prepareStatement(sql);
+        
         ps.setString(1, materia.getNombre());
         ps.setInt(2, materia.getAnio_materia());
-        ps.setInt(3, materia.getId_materia());
+        ps.setBoolean(3, materia.isActivo());
+        ps.setInt(4, materia.getId_materia());
         int exito = ps.executeUpdate();
         
         if (exito == 1) {

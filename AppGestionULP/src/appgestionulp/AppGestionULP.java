@@ -40,9 +40,9 @@ public class AppGestionULP {
         
         //instanciamos un objeto de tipo Alumno
         LocalDate fecha = LocalDate.of(2006, 5, 5);       
-        Alumno a1 = new Alumno(35200321, "Juan", "Quinteros", fecha, true);
+        Alumno a1 = new Alumno(3, 35200321, "Juan", "Quinteros", fecha, false);
         
-        Materia mat1 = new Materia("costos", 2 , true ); 
+        Materia mat1 = new Materia(7,"Sistemas II", 2 , true ); 
         
         
         
@@ -50,12 +50,15 @@ public class AppGestionULP {
         //dataAlumno.guardarAlumno(a1);
         //dataAlumno.buscarAlumno(7);
         //dataAlumno.buscarAlumnoPorDni(28222113);
+        //dataAlumno.modificarAlumno(a1);
         //dataAlumno.listarAlumnos();
+        //dataAlumno.eliminarAlumno(1);
         
         //dataMateria.guardarMateria(mat1);
         //dataMateria.buscarMateria(3);
         //dataMateria.eliminarmateria(6);
         //dataMateria.listarMaterias();
+        //dataMateria.modificarMateria(mat1);
         
     }
 }
