@@ -54,20 +54,46 @@ public class AlumnoData {
 }
     }
     
+    public static boolean esNumeroDNI(String str) {
+        if (str == null || str.isEmpty()) { // Evalúa que no sea un campo vacío
+            return false;
+        }
+
+        for (char c : str.toCharArray()) { // Evalúa que no contenga carácteres, uso un for each
+            if (!Character.isDigit(c)) {
+                return false; // No es un número válido.
+            }
+        }
+
+        try {
+            int dni = Integer.parseInt(str); // Intenta convertir a entero.
+            return dni > 999999 && dni < 99999999;
+        } catch (NumberFormatException e) {
+            return false; // No se pudo convertir a entero.
+        }
+    }
     
-    public Alumno buscarAlumno(int id) throws SQLException {
+    public Alumno buscarAlumno(int dni) throws SQLException {
         Alumno alumno = null;
-        String sql = "SELECT dni, apellido, nombre, fechaNacimiento FROM alumno WHERE idAlumno = ? AND estado = 1";
+        String sql = "SELECT dni, apellido, nombre, fechaNacimiento FROM alumno WHERE dni = ? AND estado = 1";
         PreparedStatement ps = null;
         ArrayList<Alumno> alum = new ArrayList<>();
+        
+        if (!esNumeroDNI(String.valueOf(dni))) {
+            JOptionPane.showMessageDialog(null, "El número no corresponde a un DNI o hay campos vacíos.\nIngrese un DNI válido por favor.");
+            System.out.println("El valor de 'dni' no es un entero válido o tiene más de 8 dígitos.");
+        } else {
+            System.out.println("El valor de 'dni' es un entero válido y tiene 8 o menos dígitos.");
+        }
+        
         try {
             ps = conex.Conexion_Maria().prepareStatement(sql);
-            ps.setInt(1,id );
+            ps.setInt(1,dni);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 alumno=new Alumno();
-                alumno.setId_alumno(id);
+                //alumno.setId_alumno(id);
                 alumno.setDni(rs.getInt("dni"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
@@ -95,6 +121,14 @@ public class AlumnoData {
         ArrayList<Alumno> alum = new ArrayList<>();
         String sql = "SELECT idAlumno, dni, apellido, nombre, fechaNacimiento FROM alumno WHERE dni=? AND estado = 1";
         PreparedStatement ps = null;
+        
+        if (!esNumeroDNI(String.valueOf(dni))) {
+            JOptionPane.showMessageDialog(null, "El número no corresponde a un DNI o hay campos vacíos.\nIngrese un DNI válido por favor.");
+            System.out.println("El valor de 'dni' no es un entero válido o tiene más de 8 dígitos.");
+        } else {
+            System.out.println("El valor de 'dni' es un entero válido y tiene 8 o menos dígitos.");
+        }
+        
         try {
         ps = conex.Conexion_Maria().prepareStatement(sql);
         ps.setInt(1,dni );
@@ -197,3 +231,36 @@ public class AlumnoData {
        
        
 }
+
+
+/*
+
+public static boolean esNumeroDNI(String str) {
+    if (str == null || str.isEmpty()) {
+        return false;
+    }
+
+    for (char c : str.toCharArray()) {
+        if (!Character.isDigit(c)) {
+            return false; // No es un número válido.
+        }
+    }
+
+    try {
+        int dni = Integer.parseInt(str); // Intenta convertir a entero.
+        return dni > 999999 && dni < 99999999;
+    } catch (NumberFormatException e) {
+        return false; // No se pudo convertir a entero.
+    }
+}
+
+// En tu método buscarAlumno:
+if (!esNumeroDNI(String.valueOf(dni))) {
+    JOptionPane.showMessageDialog(null, "El valor ingresado no es un DNI válido.\nIngrese un DNI válido por favor.");
+    System.out.println("El valor de 'dni' no es un entero válido o tiene más de 8 dígitos.");
+} else {
+    System.out.println("El valor de 'dni' es un entero válido y tiene 8 o menos dígitos.");
+}
+
+
+*/

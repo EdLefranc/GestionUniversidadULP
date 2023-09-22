@@ -36,7 +36,7 @@ public class Conexion {
     try {
         
         this.conexion_inst = DriverManager.getConnection(url, usuario, contraseña);
-        System.out.println("Conectado!!");
+        //System.out.println("Conectado!!");
     } catch (SQLException ex) {
         System.out.println("Error al conectar " + ex);
         this.conexion_inst = null; // Establece la conexión como null en caso de error

@@ -1,28 +1,48 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vistas;
 
 import AccesoADatos.AlumnoData;
+import AccesoADatos.Conexion;
+import AccesoADatos.InscripcionData;
 import Entidades.Alumno;
 import Entidades.Inscripcion;
 import Entidades.Materia;
 //import java.time.LocalDate;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
-//import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JDateChooser;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
  *
  * @author Ed Le Franc
  */
-public class GestionUniversidadGUI extends javax.swing.JFrame {   
+public class GestionUniversidadGUI extends javax.swing.JFrame {
+    
+    private DefaultTableModel modelo = new DefaultTableModel();
+    
+    //private com.toedter.calendar.JDateChooser JDC_FechaNac;
+
+    
 //    AlumnoData alumData = new AlumnoData();
 //    Materia mat = new Materia();
 //    Inscripcion insc = new Inscripcion();
@@ -33,6 +53,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null); // Esto setea la posición de la ventana principal de la app en el centro de la pantalla
         eliminarInternalFrames();
+        //cargarMateriasComboBox();
     }
 
     /**
@@ -78,7 +99,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         JT_NombreMateria = new javax.swing.JTextField();
         JT_AñoMateria = new javax.swing.JTextField();
         IF_Administracion = new javax.swing.JInternalFrame();
-        jLabel17 = new javax.swing.JLabel();
+        label_Titulo_Insc = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         CB_SeleccionAlumno = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
@@ -92,8 +113,16 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         SP_Tabla = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        TablaListAlumMateria = new javax.swing.JTable();
         CB_Seleccion_Materia = new javax.swing.JComboBox<>();
+        IF_ModificacionNotas = new javax.swing.JInternalFrame();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        JCB_SelecAlumnos = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Tabla_Notas = new javax.swing.JTable();
+        btn_GuardarNota = new javax.swing.JButton();
+        btn_Salir = new javax.swing.JButton();
         Menu_Nav = new javax.swing.JMenuBar();
         JM_Alumno = new javax.swing.JMenu();
         form_alumno = new javax.swing.JMenuItem();
@@ -148,11 +177,18 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
 
         btn_Buscar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btn_Buscar.setText("Buscar");
+        btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_BuscarActionPerformed(evt);
+            }
+        });
         IF_Alumno.getContentPane().add(btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 160, -1, -1));
 
         RB_Activo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         RB_Activo.setText("Activo");
         IF_Alumno.getContentPane().add(RB_Activo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, -1, -1));
+
+        JDC_FechaNac.setDateFormatString("yyyy-MM-dd");
         IF_Alumno.getContentPane().add(JDC_FechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, 313, -1));
 
         btn_Guardar_Alumno.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -297,7 +333,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                                                 .addComponent(RB_Activo_Materia)
                                                 .addComponent(JT_AñoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGap(163, 163, 163))))))))
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         IF_MateriaLayout.setVerticalGroup(
             IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,16 +378,15 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         IF_Administracion.setVisible(true);
         IF_Administracion.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel17.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel17.setText("Formulario de Inscripciones");
-        IF_Administracion.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
+        label_Titulo_Insc.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        label_Titulo_Insc.setText("Formulario de Inscripciones");
+        IF_Administracion.getContentPane().add(label_Titulo_Insc, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel12.setText("Seleccione un Alumno");
-        IF_Administracion.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, -1, 30));
+        IF_Administracion.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, -1, 30));
 
-        CB_SeleccionAlumno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        IF_Administracion.getContentPane().add(CB_SeleccionAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, 190, 30));
+        IF_Administracion.getContentPane().add(CB_SeleccionAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 390, 30));
 
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel13.setText("Listado de Materias");
@@ -367,15 +402,30 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
 
         Tabla_Inscripciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Nombre", "Año"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(Tabla_Inscripciones);
 
         IF_Administracion.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 740, 150));
@@ -404,7 +454,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         jLabel16.setText("Listado de Alumnos por Materia");
         IF_Consultas.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, -1, -1));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        TablaListAlumMateria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -413,7 +463,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -427,14 +477,109 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        SP_Tabla.setViewportView(jTable2);
+        SP_Tabla.setViewportView(TablaListAlumMateria);
 
-        IF_Consultas.getContentPane().add(SP_Tabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 730, 230));
+        IF_Consultas.getContentPane().add(SP_Tabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 760, 230));
 
-        CB_Seleccion_Materia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CB_Seleccion_Materia.setMaximumRowCount(14);
+        CB_Seleccion_Materia.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CB_Seleccion_MateriaItemStateChanged(evt);
+            }
+        });
         IF_Consultas.getContentPane().add(CB_Seleccion_Materia, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 180, 32));
 
         jDesktopPane1.add(IF_Consultas, java.awt.BorderLayout.NORTH);
+
+        IF_ModificacionNotas.setClosable(true);
+        IF_ModificacionNotas.setTitle("Cargar Notas");
+        IF_ModificacionNotas.setNormalBounds(new java.awt.Rectangle(0, 0, 71, 0));
+        IF_ModificacionNotas.setPreferredSize(new java.awt.Dimension(800, 600));
+        IF_ModificacionNotas.setVisible(true);
+
+        jLabel17.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel17.setText("Actualizar Notas");
+
+        jLabel14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel14.setText("Seleccione un alumno");
+
+        Tabla_Notas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Código", "Nombre", "Nota"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(Tabla_Notas);
+
+        btn_GuardarNota.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btn_GuardarNota.setText("Guardar");
+
+        btn_Salir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btn_Salir.setText("Salir");
+
+        javax.swing.GroupLayout IF_ModificacionNotasLayout = new javax.swing.GroupLayout(IF_ModificacionNotas.getContentPane());
+        IF_ModificacionNotas.getContentPane().setLayout(IF_ModificacionNotasLayout);
+        IF_ModificacionNotasLayout.setHorizontalGroup(
+            IF_ModificacionNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(IF_ModificacionNotasLayout.createSequentialGroup()
+                .addGroup(IF_ModificacionNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(IF_ModificacionNotasLayout.createSequentialGroup()
+                        .addGap(250, 250, 250)
+                        .addComponent(jLabel17))
+                    .addGroup(IF_ModificacionNotasLayout.createSequentialGroup()
+                        .addGap(119, 119, 119)
+                        .addComponent(jLabel14)
+                        .addGap(88, 88, 88)
+                        .addComponent(JCB_SelecAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(IF_ModificacionNotasLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(IF_ModificacionNotasLayout.createSequentialGroup()
+                        .addGap(177, 177, 177)
+                        .addComponent(btn_GuardarNota, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(btn_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+        IF_ModificacionNotasLayout.setVerticalGroup(
+            IF_ModificacionNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(IF_ModificacionNotasLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jLabel17)
+                .addGap(41, 41, 41)
+                .addGroup(IF_ModificacionNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JCB_SelecAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(77, 77, 77)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addGroup(IF_ModificacionNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_GuardarNota)
+                    .addComponent(btn_Salir))
+                .addGap(69, 69, 69))
+        );
+
+        jDesktopPane1.add(IF_ModificacionNotas, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jDesktopPane1);
 
@@ -475,6 +620,11 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         JM_Admin.add(form_manejoInscripciones);
 
         form_modNotas.setText("Modificación de Notas");
+        form_modNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                form_modNotasActionPerformed(evt);
+            }
+        });
         JM_Admin.add(form_modNotas);
 
         Menu_Nav.add(JM_Admin);
@@ -514,11 +664,12 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         IF_Alumno.setVisible(false);
         IF_Consultas.setVisible(false);
         IF_Materia.setVisible(false);
+        IF_ModificacionNotas.setVisible(false);
     }
     
-    private void mostrar_internalFrame(JInternalFrame Ventana, boolean visibilidad){
-        Ventana.setVisible(visibilidad);        
-    }
+//    private void mostrar_internalFrame(JInternalFrame Ventana, boolean visibilidad){
+//        Ventana.setVisible(visibilidad);        
+//    }
     
     private void form_alumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_form_alumnoActionPerformed
         eliminarInternalFrames();
@@ -603,6 +754,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_form_manejoInscripcionesActionPerformed
 
     private void consulta_alumMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consulta_alumMateriasActionPerformed
+        cargarMateriasComboBox();
         eliminarInternalFrames();
         IF_Consultas.setVisible(true);
         
@@ -619,32 +771,167 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
 
     private void btn_Nuevo_AlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Nuevo_AlumnoActionPerformed
         JT_Dni.setText("");
-        
+        JT_Apellido.setText("");
+        JT_Nombre.setText("");
+        RB_Activo.setSelected(false);
+        JDC_FechaNac.setDate(null);        
     }//GEN-LAST:event_btn_Nuevo_AlumnoActionPerformed
 
     private void btn_Eliminar_AlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Eliminar_AlumnoActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btn_Eliminar_AlumnoActionPerformed
 
     private void btn_Guardar_AlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Guardar_AlumnoActionPerformed
-        AlumnoData alumData = new AlumnoData();       
+        AlumnoData alumData = new AlumnoData();        
         
-            String dni = JT_Dni.getText();
-            String nombre = JT_Nombre.getText();
-            String apellido = JT_Apellido.getText();
-            Date fechaDCH = (Date) JDC_FechaNac.getDate(); // Casteamos el dato capturado a tipo Date.
-
-            // Convertir Date a LocalDate puuufff!!
-            LocalDate fechaNac = fechaDCH.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            boolean estado = true;
-
-            Alumno alum = new Alumno(Integer.parseInt(dni), nombre, apellido, fechaNac, estado);
-            
-            alumData.guardarAlumno(alum);    
+        String dni = JT_Dni.getText();
+        String nombre = JT_Nombre.getText();
+        String apellido = JT_Apellido.getText();
         
+        String date = ((JTextField)JDC_FechaNac.getDateEditor().getUiComponent()).getText(); // capturo la fecha como String        
+
+        // Convertir Date a LocalDate puuufff!!
+        LocalDate fechaNac = LocalDate.parse(date);
+        
+        //java.sql.Date sqlDate = new java.sql.Date(fechaNac); // Convertimos a java.sql.Date        
+        boolean estado = true;
+
+        Alumno alum = new Alumno(Integer.parseInt(dni), nombre, apellido, fechaNac, estado);
+        alumData.guardarAlumno(alum);        
     }//GEN-LAST:event_btn_Guardar_AlumnoActionPerformed
 
+    private void btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BuscarActionPerformed
+        AlumnoData alumData = new AlumnoData();
+        ArrayList <Alumno> alumnoBuscado = new ArrayList<>();
+        String dni = JT_Dni.getText();
+        int dniAlumno = Integer.parseInt(dni);
+        
+        try {
+            alumData.buscarAlumno(dniAlumno);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionUniversidadGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        alumnoBuscado.add(alumData.buscarAlumnoPorDni(dniAlumno));
+        // Verifica si se encontró un alumno antes de mostrar los datos
+        if (!alumnoBuscado.isEmpty()) { // Al ser un solo alumno colocamos get(0), ya que el primer índice es cero
+            String apellido = alumnoBuscado.get(0).getApellido();
+            String nombre = alumnoBuscado.get(0).getNombre();           
+            LocalDate localDate = alumnoBuscado.get(0).getFechaNac();
+            java.util.Date utilDate = java.util.Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            
 
+            // Muestra los datos en los campos de información
+            JT_Apellido.setText(apellido);
+            JT_Nombre.setText(nombre);
+            JDC_FechaNac.setDate(utilDate);
+            RB_Activo.setSelected(true);
+        } else {
+            // Si no se encontró un alumno, puedes manejarlo adecuadamente
+            JT_Apellido.setText("No se encontró el alumno");
+            JT_Nombre.setText("");
+        }
+    }//GEN-LAST:event_btn_BuscarActionPerformed
+    
+    public int obtenerIdMateria(String nombreMateria){
+        Conexion conex = new Conexion();
+        // Obtengo el ID de la materia seleccionada en función del nombre capturado en el comboBox
+                //String nombreMateriaSeleccionada = (String) CB_Seleccion_Materia.getSelectedItem();
+                
+                // Realizo la consulta sql para obtener el ID de la materia en función del nombre
+                String sqlObtenerIdMateria = "SELECT idMateria FROM materia WHERE nombre = ?";
+                int idMateriaSeleccionada = -1; // Valor predeterminado en caso de que no se encuentre la materia (no existe un item -1)
+                
+                try (PreparedStatement ps = conex.Conexion_Maria().prepareStatement(sqlObtenerIdMateria)) {
+                    ps.setString(1, nombreMateria); // Configura el parámetro con el nombre seleccionado
+                    ResultSet rs = ps.executeQuery();
+                    
+                    if (rs.next()) {
+                        idMateriaSeleccionada = rs.getInt("idMateria"); // Obtiene el ID de la materia
+                    }
+                } catch (SQLException e1) {
+                    System.out.println("Error al obtener el ID de la materia. ERROR: " + e1);
+                }
+        //System.out.println("El id de la materia " + nombreMateria + " es: " + idMateriaSeleccionada);
+        return idMateriaSeleccionada;
+    }
+    
+    private void CB_Seleccion_MateriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CB_Seleccion_MateriaItemStateChanged
+        
+        InscripcionData inscData = new InscripcionData();
+        String nombreMateria = (String) CB_Seleccion_Materia.getSelectedItem();
+        List<Alumno> alumnosEnMateria = inscData.obtenerAlumnoPorMateria(obtenerIdMateria(nombreMateria));
+        // Obtengo la lista de alumnos        
+
+        // Obtengo el modelo de la tabla existente
+        DefaultTableModel modeloTabla = (DefaultTableModel) TablaListAlumMateria.getModel();
+
+        // Limpia la tabla (borra todas las filas existentes)
+        modeloTabla.setRowCount(0);
+
+        // Itero sobre la lista de alumnos y agrego a cada alumno a la tabla
+        alumnosEnMateria.forEach((alumno) -> {
+            // Agrega una fila con los datos del alumno en el mismo orden que las columnas
+            modeloTabla.addRow(new Object[]{alumno.getId_alumno(), alumno.getDni(), alumno.getNombre(), alumno.getApellido()});
+        });
+
+        // Actualiza la tabla para que se muestren los nuevos datos
+        modeloTabla.fireTableDataChanged();
+          
+    }//GEN-LAST:event_CB_Seleccion_MateriaItemStateChanged
+
+    private void form_modNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_form_modNotasActionPerformed
+        eliminarInternalFrames();
+        IF_ModificacionNotas.setVisible(true);
+        
+        // Luego, cuando desees abrir la ventana interna:
+        if (IF_ModificacionNotas == null || IF_ModificacionNotas.isClosed()) {            
+            // Agregando la ventana interna al jDesktopPane1
+            jDesktopPane1.add(IF_ModificacionNotas);
+            IF_ModificacionNotas.setVisible(true); //hacerlo visible
+        }
+
+        // Me aseguro de manejar el evento de cierre para 'ocultar' en lugar de 'eliminar'
+        IF_ModificacionNotas.setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
+    }//GEN-LAST:event_form_modNotasActionPerformed
+
+    private void cargarMateriasComboBox() {
+        
+        Conexion conex = new Conexion();
+        // Usar un conjunto (Set) para almacenar las materias sin duplicados
+            Set<String> materias = new HashSet<>();
+        
+        try {
+            // Consulta SQL para obtener todas las materias sin repetir
+            String sql = "SELECT DISTINCT nombre FROM materia";
+            try (PreparedStatement ps = conex.Conexion_Maria().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                
+                ResultSet rs = ps.executeQuery();
+                
+                // Iterar a través de los resultados y agregar las materias al conjunto
+                while (rs.next()) {
+                    materias.add(rs.getString("nombre"));
+                }
+//                System.out.println("Estas son todas las materias");
+//                System.out.println(materias);
+                // Agregar las materias al JComboBox
+                materias.forEach((materia) -> { //uso una función operacional.
+                    CB_Seleccion_Materia.addItem(materia);
+                });
+                
+                
+                if (rs.next()) {
+                    //alumno.setId_alumno(rs.getInt("idAlumno"));
+                    JOptionPane.showMessageDialog(null, "Alumno añadido con exito.");
+                    
+                } 
+            }           
+                        
+        } catch (SQLException e) {
+            System.out.println("No se ha cargado el comboBox, error: " + e);
+            // Manejar cualquier excepción que pueda ocurrir durante la carga de datos
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -690,6 +977,8 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JInternalFrame IF_Alumno;
     private javax.swing.JInternalFrame IF_Consultas;
     private javax.swing.JInternalFrame IF_Materia;
+    private javax.swing.JInternalFrame IF_ModificacionNotas;
+    private javax.swing.JComboBox<String> JCB_SelecAlumnos;
     private com.toedter.calendar.JDateChooser JDC_FechaNac;
     private javax.swing.JMenu JM_Admin;
     private javax.swing.JMenu JM_Alumno;
@@ -708,15 +997,19 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton RB_MateriasInsc;
     private javax.swing.JRadioButton RB_MateriasNoInsc;
     private javax.swing.JScrollPane SP_Tabla;
+    private javax.swing.JTable TablaListAlumMateria;
     private javax.swing.JTable Tabla_Inscripciones;
+    private javax.swing.JTable Tabla_Notas;
     private javax.swing.JButton btn_Buscar;
     private javax.swing.JButton btn_Buscar_Cod_Materia;
     private javax.swing.JButton btn_Eliminar_Alumno;
     private javax.swing.JButton btn_Eliminar_Materia;
+    private javax.swing.JButton btn_GuardarNota;
     private javax.swing.JButton btn_Guardar_Alumno;
     private javax.swing.JButton btn_Guardar_Materia;
     private javax.swing.JButton btn_Nuevo_Alumno;
     private javax.swing.JButton btn_Nuevo_Materia;
+    private javax.swing.JButton btn_Salir;
     private javax.swing.JButton btn_Salir_Materia;
     private javax.swing.JMenuItem consulta_alumMaterias;
     private javax.swing.JMenuItem form_alumno;
@@ -729,6 +1022,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -742,36 +1036,93 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel label_Titulo_Insc;
     private javax.swing.JMenuItem opcionSalir;
     // End of variables declaration//GEN-END:variables
+
+    private void armarCabecera(){
+
+        modelo.addColumn("Id");
+        modelo.addColumn("DNI");        
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Estado");
+
+        TablaListAlumMateria.setModel(modelo);
+}
+    
+    
+    
 }
 
 
 /*
+    CREATE TABLE inscripcion (
+    idInscripcion INT AUTO_INCREMENT PRIMARY KEY,
+    nota DOUBLE,
+    idAlumno INT,
+    idMateria INT,
+    -- Restricción única para evitar inscripciones duplicadas
+    UNIQUE KEY unique_inscripcion (idAlumno, idMateria),
+    FOREIGN KEY (idAlumno) REFERENCES alumno(idAlumno),
+    FOREIGN KEY (idMateria) REFERENCES materia(idMateria)
+);
 
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
+    public boolean verificarInscripcionDuplicada(int idAlumno, int idMateria) {
+    Conexion conn = new Conexion();
 
-// ...
-
-private void btn_Nuevo_AlumnoActionPerformed(java.awt.event.ActionEvent evt) {                                                 
-    String dni = JT_Dni.getText();
-    String nombre = JT_Nombre.getText();
-    String apellido = JT_Apellido.getText();
-    Date fechaDate = JDC_FechaNac.getDate(); // Obtenemos la fecha como Date
+    try {
+        String sql = "SELECT COUNT(*) AS count FROM inscripcion WHERE idAlumno = ? AND idMateria = ?";
+        
+        try (PreparedStatement ps = conn.Conexion_Maria().prepareStatement(sql)) {
+            ps.setInt(1, idAlumno);
+            ps.setInt(2, idMateria);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                int count = rs.getInt("count");
+                return count > 0; // Si count es mayor que 0, ya existe una inscripción.
+            }
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al verificar inscripción duplicada: " + ex.getMessage());
+        System.out.println("El error es: " + ex);
+    }
     
-    // Convertimos Date a LocalDate
-    LocalDate fecha = fechaDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-    
-    boolean estado = true;
-    
-    Alumno alum = new Alumno(Integer.parseInt(dni), nombre, apellido, fecha, estado);
-    alumData.guardarAlumno(alum);
+    return false; // Si hubo un error o no se encontró ninguna inscripción, se asume que no está duplicada.
 }
 
+public void insertarInscripcion(int idAlumno, int idMateria, double nota) {
+    Conexion conn = new Conexion();
+
+    // Verificar si la inscripción ya existe antes de insertar
+    if (!verificarInscripcionDuplicada(idAlumno, idMateria)) {
+        try {
+            String sql = "INSERT INTO inscripcion (idAlumno, idMateria, nota) VALUES (?, ?, ?)";
+            
+            try (PreparedStatement ps = conn.Conexion_Maria().prepareStatement(sql)) {
+                ps.setInt(1, idAlumno);
+                ps.setInt(2, idMateria);
+                ps.setDouble(3, nota);
+                
+                int rowsAffected = ps.executeUpdate();
+                
+                if (rowsAffected > 0) {
+                    System.out.println("Inscripción insertada correctamente.");
+                } else {
+                    System.out.println("No se pudo insertar la inscripción.");
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al insertar inscripción: " + ex.getMessage());
+            System.out.println("El error es: " + ex);
+        }
+    } else {
+        System.out.println("La inscripción ya existe, no se insertará duplicada.");
+    }
+}
 
 
 
