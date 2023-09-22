@@ -45,9 +45,10 @@ public void guardarMateria(Materia materia) {
     
 public Materia buscarMateria(int id) throws SQLException {
         Materia materia = null;
-        String sql = "SELECT nombre, año FROM materia WHERE idMateria = ? AND estado = 1";
+        String sql = "SELECT materia.idMateria, materia.nombre, materia.año, materia.estado"
+                + " FROM materia WHERE idMateria = ? AND estado = 1";
         PreparedStatement ps = null;
-        ArrayList<Materia> mater = new ArrayList<>();
+        ArrayList<Materia> materias = new ArrayList<>();
         try {
             ps = conex.Conexion_Maria().prepareStatement(sql);
             ps.setInt(1,id );
@@ -59,8 +60,8 @@ public Materia buscarMateria(int id) throws SQLException {
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAnio_materia(rs.getInt("año"));
                 materia.setActivo(true);
-                mater.add(materia);
-                System.out.println(mater);
+                materias.add(materia);
+                System.out.println(materias);
                 JOptionPane.showMessageDialog(null, "Materia encontrada");
                 } else{
                 JOptionPane.showMessageDialog(null, "No existe la materia");       

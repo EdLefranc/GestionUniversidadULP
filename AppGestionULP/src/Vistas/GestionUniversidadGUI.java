@@ -3,6 +3,7 @@ package Vistas;
 import AccesoADatos.AlumnoData;
 import AccesoADatos.Conexion;
 import AccesoADatos.InscripcionData;
+import AccesoADatos.MateriaData;
 import Entidades.Alumno;
 import Entidades.Inscripcion;
 import Entidades.Materia;
@@ -250,7 +251,12 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         });
 
         btn_Buscar_Cod_Materia.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btn_Buscar_Cod_Materia.setText("Buscar");
+        btn_Buscar_Cod_Materia.setText("Buscar Materia");
+        btn_Buscar_Cod_Materia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Buscar_Cod_MateriaActionPerformed(evt);
+            }
+        });
 
         btn_Nuevo_Materia.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btn_Nuevo_Materia.setText("Nuevo");
@@ -294,8 +300,8 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         IF_Materia.getContentPane().setLayout(IF_MateriaLayout);
         IF_MateriaLayout.setHorizontalGroup(
             IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(IF_MateriaLayout.createSequentialGroup()
-                .addGap(131, 131, 131)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IF_MateriaLayout.createSequentialGroup()
+                .addContainerGap(145, Short.MAX_VALUE)
                 .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IF_MateriaLayout.createSequentialGroup()
                         .addComponent(btn_Nuevo_Materia)
@@ -305,68 +311,66 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                         .addComponent(btn_Guardar_Materia)
                         .addGap(121, 121, 121))
                     .addComponent(btn_Salir_Materia, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(IF_MateriaLayout.createSequentialGroup()
-                            .addComponent(jLabel9)
-                            .addGap(65, 65, 65)
-                            .addComponent(JT_CodigoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(30, 30, 30)
-                            .addComponent(btn_Buscar_Cod_Materia))
-                        .addGroup(IF_MateriaLayout.createSequentialGroup()
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(65, 65, 65)
-                            .addComponent(JT_NombreMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(IF_MateriaLayout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel11)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IF_MateriaLayout.createSequentialGroup()
+                        .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(IF_MateriaLayout.createSequentialGroup()
-                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel9)
+                                    .addGap(65, 65, 65)
+                                    .addComponent(JT_NombreMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(IF_MateriaLayout.createSequentialGroup()
                                     .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(IF_MateriaLayout.createSequentialGroup()
-                                            .addGap(90, 90, 90)
-                                            .addComponent(jLabel7)
-                                            .addGap(180, 180, 180))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IF_MateriaLayout.createSequentialGroup()
-                                            .addGap(58, 58, 58)
-                                            .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(RB_Activo_Materia)
-                                                .addComponent(JT_AñoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGap(163, 163, 163))))))))
+                                        .addComponent(jLabel10)
+                                        .addComponent(jLabel11))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(RB_Activo_Materia)
+                                        .addComponent(JT_AñoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(IF_MateriaLayout.createSequentialGroup()
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(65, 65, 65)
+                                .addComponent(JT_CodigoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(70, 70, 70)
+                        .addComponent(btn_Buscar_Cod_Materia, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(134, 134, 134))
+            .addGroup(IF_MateriaLayout.createSequentialGroup()
+                .addGap(331, 331, 331)
+                .addComponent(jLabel7)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         IF_MateriaLayout.setVerticalGroup(
             IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(IF_MateriaLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(41, 41, 41)
                 .addComponent(jLabel7)
-                .addGap(69, 69, 69)
-                .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(80, 80, 80)
+                .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(IF_MateriaLayout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(JT_CodigoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_Buscar_Cod_Materia)))
-                .addGap(30, 30, 30)
-                .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JT_NombreMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(18, 18, 18)
-                .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JT_AñoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addGap(28, 28, 28)
+                        .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8)
+                            .addComponent(JT_CodigoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(IF_MateriaLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(JT_NombreMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(JT_AñoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btn_Buscar_Cod_Materia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
                 .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(RB_Activo_Materia)
                     .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(72, 72, 72)
                 .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Nuevo_Materia)
                     .addComponent(btn_Eliminar_Materia)
                     .addComponent(btn_Guardar_Materia)
                     .addComponent(btn_Salir_Materia))
-                .addGap(95, 95, 95))
+                .addGap(103, 103, 103))
         );
 
         jDesktopPane1.add(IF_Materia, java.awt.BorderLayout.EAST);
@@ -559,7 +563,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                         .addComponent(btn_GuardarNota, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(49, 49, 49)
                         .addComponent(btn_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         IF_ModificacionNotasLayout.setVerticalGroup(
             IF_ModificacionNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -572,7 +576,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                     .addComponent(JCB_SelecAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(77, 77, 77)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(IF_ModificacionNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_GuardarNota)
                     .addComponent(btn_Salir))
@@ -813,7 +817,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         }
         
         alumnoBuscado.add(alumData.buscarAlumnoPorDni(dniAlumno));
-        // Verifica si se encontró un alumno antes de mostrar los datos
+        // Verifico si se encontró un alumno antes de mostrar los datos
         if (!alumnoBuscado.isEmpty()) { // Al ser un solo alumno colocamos get(0), ya que el primer índice es cero
             String apellido = alumnoBuscado.get(0).getApellido();
             String nombre = alumnoBuscado.get(0).getNombre();           
@@ -827,7 +831,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
             JDC_FechaNac.setDate(utilDate);
             RB_Activo.setSelected(true);
         } else {
-            // Si no se encontró un alumno, puedes manejarlo adecuadamente
+            // Si no se encontró un alumno, se puede manejarlo de manera adecuada
             JT_Apellido.setText("No se encontró el alumno");
             JT_Nombre.setText("");
         }
@@ -895,6 +899,39 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         IF_ModificacionNotas.setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
     }//GEN-LAST:event_form_modNotasActionPerformed
 
+    private void btn_Buscar_Cod_MateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Buscar_Cod_MateriaActionPerformed
+        try {
+            MateriaData matData = new MateriaData();
+            int codMateria = Integer.parseInt(JT_CodigoMateria.getText());
+            ArrayList<Materia> matAlmacen = new ArrayList<>() ;
+            
+            matAlmacen.add(matData.buscarMateria(codMateria));
+            // Obtengo la materia almacenada y luego accedo a sus datos      
+            
+            if (!matAlmacen.isEmpty()) {
+                int codigo = matAlmacen.get(0).getId_materia();
+                String nombre = matAlmacen.get(0).getNombre();
+                int anio = matAlmacen.get(0).getAnio_materia();               
+                
+                //Mostrando los datos en los campos de texto
+                String codigoAString = String.valueOf(codigo);
+                String anioAString = String.valueOf(anio);
+                
+                JT_CodigoMateria.setText(codigoAString);
+                JT_NombreMateria.setText(nombre);
+                JT_AñoMateria.setText(anioAString);
+                RB_Activo_Materia.setSelected(true);                
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró la materia");
+            }  
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionUniversidadGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btn_Buscar_Cod_MateriaActionPerformed
+
     private void cargarMateriasComboBox() {
         
         Conexion conex = new Conexion();
@@ -918,13 +955,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                 materias.forEach((materia) -> { //uso una función operacional.
                     CB_Seleccion_Materia.addItem(materia);
                 });
-                
-                
-                if (rs.next()) {
-                    //alumno.setId_alumno(rs.getInt("idAlumno"));
-                    JOptionPane.showMessageDialog(null, "Alumno añadido con exito.");
-                    
-                } 
+                               
             }           
                         
         } catch (SQLException e) {
