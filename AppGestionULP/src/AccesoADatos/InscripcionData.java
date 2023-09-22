@@ -203,13 +203,7 @@ public class InscripcionData {
     public void actualizarNota(int idMateria, double nota){
         
     }
-    
-    public int idMateria(){
-        
-        
-        return 0;        
-    }
-    
+       
     public List <Alumno> obtenerAlumnoPorMateria(int id){
        
        Conexion conn = new Conexion(); 
