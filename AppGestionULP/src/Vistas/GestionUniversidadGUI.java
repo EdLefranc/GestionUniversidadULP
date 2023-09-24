@@ -783,6 +783,18 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
 
     private void btn_Eliminar_AlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Eliminar_AlumnoActionPerformed
         
+        if(JT_Dni.getText().equals("") || JT_Apellido.getText().isEmpty()|| JT_Nombre.getText().isEmpty()) { //|| JDC_FechaNac == null|| RB_Activo = false){
+        
+            JOptionPane.showMessageDialog(null, "Hay campos vacios");
+        
+        }else{
+            
+            RB_Activo.setSelected(false);
+            System.out.println("Alumno dado de baja");
+            
+        }
+        
+        
     }//GEN-LAST:event_btn_Eliminar_AlumnoActionPerformed
 
     private void btn_Guardar_AlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Guardar_AlumnoActionPerformed
