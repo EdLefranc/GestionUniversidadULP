@@ -699,7 +699,19 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_Nuevo_MateriaActionPerformed
 
     private void btn_Eliminar_MateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Eliminar_MateriaActionPerformed
-        // TODO add your handling code here:
+        
+        
+        MateriaData materia = new MateriaData();
+        
+        String idMateria = JT_CodigoMateria.getText();
+         
+        int id = Integer.parseInt(idMateria);
+         
+            
+        materia.eliminarmateria(id);
+        
+        
+        
     }//GEN-LAST:event_btn_Eliminar_MateriaActionPerformed
 
     private void btn_Guardar_MateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Guardar_MateriaActionPerformed
@@ -783,16 +795,15 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
 
     private void btn_Eliminar_AlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Eliminar_AlumnoActionPerformed
         
-        if(JT_Dni.getText().equals("") || JT_Apellido.getText().isEmpty()|| JT_Nombre.getText().isEmpty()) { //|| JDC_FechaNac == null|| RB_Activo = false){
+        AlumnoData alumno = new AlumnoData();
         
-            JOptionPane.showMessageDialog(null, "Hay campos vacios");
-        
-        }else{
+        String dni = JT_Dni.getText();
+         
+        int id = Integer.parseInt(dni);
+         
             
-            RB_Activo.setSelected(false);
-            System.out.println("Alumno dado de baja");
-            
-        }
+        alumno.eliminarAlumno(id);
+      
         
         
     }//GEN-LAST:event_btn_Eliminar_AlumnoActionPerformed

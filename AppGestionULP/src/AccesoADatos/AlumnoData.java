@@ -30,7 +30,7 @@ public class AlumnoData {
     }
         
        
-       
+    //Guardar Alumno   
     public void guardarAlumno(Alumno alumno) {
         String sql = "INSERT INTO alumno (dni, apellido, nombre, fechaNacimiento, estado) VALUES (?, ?, ?, ?, ?)";
         try {
@@ -73,6 +73,7 @@ public class AlumnoData {
         }
     }
     
+    //Buscar Alumno
     public Alumno buscarAlumno(int dni) throws SQLException {
         Alumno alumno = null;
         String sql = "SELECT dni, apellido, nombre, fechaNacimiento FROM alumno WHERE dni = ? AND estado = 1";
@@ -115,7 +116,7 @@ public class AlumnoData {
         return alumno;        
 }
 
-
+    //Buscar Alumno por DNI
     public Alumno buscarAlumnoPorDni(int dni) {
         Alumno alumno = null;
         ArrayList<Alumno> alum = new ArrayList<>();
@@ -155,7 +156,7 @@ public class AlumnoData {
         return alumno;       
 }
 
-
+    //Listado de Alumnos
     public List<Alumno> listarAlumnos() {
         
         List<Alumno> alumnos = new ArrayList<>();
@@ -183,7 +184,7 @@ public class AlumnoData {
         return alumnos;
 }
 
-
+    //Modificar Alumno
     public void modificarAlumno(Alumno alumno){
         String sql = "UPDATE alumno SET dni = ? , apellido = ?, nombre = ?, fechaNacimiento = ?, estado = ? WHERE idAlumno = ?";
         PreparedStatement ps = null;
@@ -209,7 +210,7 @@ public class AlumnoData {
         }
     }
 
-
+    //Eliminar Alumno
     public void eliminarAlumno(int id) {
         try {
         String sql = "UPDATE alumno SET estado = 0 WHERE idAlumno = ? ";
