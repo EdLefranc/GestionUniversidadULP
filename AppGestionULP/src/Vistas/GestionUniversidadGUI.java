@@ -699,7 +699,19 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_Nuevo_MateriaActionPerformed
 
     private void btn_Eliminar_MateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Eliminar_MateriaActionPerformed
-        // TODO add your handling code here:
+        
+        
+        MateriaData materia = new MateriaData();
+        
+        String idMateria = JT_CodigoMateria.getText();
+         
+        int id = Integer.parseInt(idMateria);
+         
+            
+        materia.eliminarmateria(id);
+        
+        
+        
     }//GEN-LAST:event_btn_Eliminar_MateriaActionPerformed
 
     private void btn_Guardar_MateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Guardar_MateriaActionPerformed
@@ -782,6 +794,17 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_Nuevo_AlumnoActionPerformed
 
     private void btn_Eliminar_AlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Eliminar_AlumnoActionPerformed
+        
+        AlumnoData alumno = new AlumnoData();
+        
+        String dni = JT_Dni.getText();
+         
+        int id = Integer.parseInt(dni);
+         
+            
+        alumno.eliminarAlumno(id);
+      
+        
         
     }//GEN-LAST:event_btn_Eliminar_AlumnoActionPerformed
 
