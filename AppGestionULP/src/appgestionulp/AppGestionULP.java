@@ -11,6 +11,7 @@ import AccesoADatos.InscripcionData;
 import AccesoADatos.MateriaData;
 import Entidades.Alumno;
 import Entidades.Materia;
+import Vistas.GestionUniversidadGUI;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,6 +37,7 @@ public class AppGestionULP {
         Conexion conn = new Conexion();
         InscripcionData insc = new InscripcionData();
         AlumnoData dataAlumno = new AlumnoData();
+        GestionUniversidadGUI gui = new GestionUniversidadGUI();
 
         MateriaData dataMateria = new MateriaData();
         
@@ -43,16 +45,12 @@ public class AppGestionULP {
         LocalDate fecha = LocalDate.of(2006, 5, 5);       
         Alumno a1 = new Alumno(3, 35200321, "Juan", "Quinteros", fecha, false);
         
-        Materia mat1 = new Materia(7,"Sistemas II", 2 , true ); 
-        
-        
-        
-        String nombre = "Scrum";
-        
+        Materia mat1 = new Materia(7,"Sistemas II", 2 , true );        
+        String nombre = "Scrum";       
         Materia mat = new Materia(9, nombre, 2, true);
         
         //insc.obtenerMateriasCursadas(4);
-        dataAlumno.guardarAlumno(a1);
+        //dataAlumno.guardarAlumno(a1);
         //dataAlumno.buscarAlumno(7);
         //dataAlumno.buscarAlumnoPorDni(28222113);
 
@@ -71,12 +69,12 @@ public class AppGestionULP {
         //dataMateria.eliminarmateria(6);
         //dataMateria.listarMaterias();
         //dataMateria.modificarMateria(mat1);
-<<<<<<< Updated upstream
 
-=======
+        
         //insc.obtenerAlumnoPorMateria(5);
         //gui.obtenerIdMateria("Programacion 2");
->>>>>>> Stashed changes
+        
+
     }
 }
         
