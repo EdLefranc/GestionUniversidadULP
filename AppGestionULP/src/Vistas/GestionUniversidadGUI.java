@@ -1,9 +1,11 @@
 package Vistas;
 
 import AccesoADatos.AlumnoData;
+
 import AccesoADatos.Conexion;
 import AccesoADatos.InscripcionData;
 import AccesoADatos.MateriaData;
+
 import Entidades.Alumno;
 import Entidades.Inscripcion;
 import Entidades.Materia;
@@ -65,7 +67,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         JT_Apellido = new javax.swing.JTextField();
         JT_Nombre = new javax.swing.JTextField();
         btn_Buscar = new javax.swing.JButton();
-        RB_Activo = new javax.swing.JRadioButton();
+        RB_Activo_Alumno = new javax.swing.JRadioButton();
         JDC_FechaNac = new com.toedter.calendar.JDateChooser();
         btn_Guardar_Alumno = new javax.swing.JButton();
         btn_Nuevo_Alumno = new javax.swing.JButton();
@@ -96,6 +98,14 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         Tabla_Inscripciones = new javax.swing.JTable();
         BTN_Inscripcion = new javax.swing.JButton();
         BTN_AnularInsc = new javax.swing.JButton();
+        IF_ModificacionNotas = new javax.swing.JInternalFrame();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        JCB_SelecAlumnos = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Tabla_Notas = new javax.swing.JTable();
+        btn_GuardarNota = new javax.swing.JButton();
+        btn_Salir = new javax.swing.JButton();
         IF_Consultas = new javax.swing.JInternalFrame();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -182,9 +192,17 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         });
         IF_Alumno.getContentPane().add(btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 160, -1, 50));
 
-        RB_Activo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        RB_Activo.setText("Activo");
-        IF_Alumno.getContentPane().add(RB_Activo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, -1, -1));
+        RB_Activo_Alumno.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        RB_Activo_Alumno.setText("Activo");
+        RB_Activo_Alumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RB_Activo_AlumnoActionPerformed(evt);
+            }
+        });
+        IF_Alumno.getContentPane().add(RB_Activo_Alumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, -1, -1));
+
+        JDC_FechaNac.setDateFormatString("yyyy-MM-dd");
+        IF_Alumno.getContentPane().add(JDC_FechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, 313, -1));
 
         JDC_FechaNac.setForeground(new java.awt.Color(0, 204, 0));
         JDC_FechaNac.setDateFormatString("yyyy-MM-dd");
@@ -229,10 +247,10 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         jLabel7.setText("Materia");
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel8.setText("Código:");
+        jLabel8.setText("Nombre");
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel9.setText("Nombre:");
+        jLabel9.setText("Código:");
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel10.setText("Año:");
@@ -242,6 +260,11 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
 
         RB_Activo_Materia.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         RB_Activo_Materia.setText("Activo");
+        RB_Activo_Materia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RB_Activo_MateriaActionPerformed(evt);
+            }
+        });
 
         btn_Buscar_Cod_Materia.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btn_Buscar_Cod_Materia.setText("Buscar Materia");
@@ -444,6 +467,112 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
 
         jDeskFondo.add(IF_Administracion, java.awt.BorderLayout.NORTH);
 
+        IF_ModificacionNotas.setClosable(true);
+        IF_ModificacionNotas.setTitle("Cargar Notas");
+        IF_ModificacionNotas.setNormalBounds(new java.awt.Rectangle(0, 0, 71, 0));
+        IF_ModificacionNotas.setPreferredSize(new java.awt.Dimension(800, 600));
+        IF_ModificacionNotas.setVisible(true);
+
+        jLabel17.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel17.setText("Actualizar Notas");
+
+        jLabel14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel14.setText("Seleccione un alumno");
+
+        JCB_SelecAlumnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCB_SelecAlumnosActionPerformed(evt);
+            }
+        });
+
+        Tabla_Notas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Código", "Nombre", "Nota"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(Tabla_Notas);
+
+        btn_GuardarNota.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btn_GuardarNota.setText("Guardar");
+        btn_GuardarNota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_GuardarNotaActionPerformed(evt);
+            }
+        });
+
+        btn_Salir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btn_Salir.setText("Salir");
+        btn_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SalirActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout IF_ModificacionNotasLayout = new javax.swing.GroupLayout(IF_ModificacionNotas.getContentPane());
+        IF_ModificacionNotas.getContentPane().setLayout(IF_ModificacionNotasLayout);
+        IF_ModificacionNotasLayout.setHorizontalGroup(
+            IF_ModificacionNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(IF_ModificacionNotasLayout.createSequentialGroup()
+                .addGroup(IF_ModificacionNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(IF_ModificacionNotasLayout.createSequentialGroup()
+                        .addGap(250, 250, 250)
+                        .addComponent(jLabel17))
+                    .addGroup(IF_ModificacionNotasLayout.createSequentialGroup()
+                        .addGap(119, 119, 119)
+                        .addComponent(jLabel14)
+                        .addGap(88, 88, 88)
+                        .addComponent(JCB_SelecAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(IF_ModificacionNotasLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(IF_ModificacionNotasLayout.createSequentialGroup()
+                        .addGap(177, 177, 177)
+                        .addComponent(btn_GuardarNota, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(btn_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        IF_ModificacionNotasLayout.setVerticalGroup(
+            IF_ModificacionNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(IF_ModificacionNotasLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jLabel17)
+                .addGap(41, 41, 41)
+                .addGroup(IF_ModificacionNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JCB_SelecAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(77, 77, 77)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(IF_ModificacionNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_GuardarNota)
+                    .addComponent(btn_Salir))
+                .addGap(69, 69, 69))
+        );
+
+        jDesktopPane1.add(IF_ModificacionNotas, java.awt.BorderLayout.CENTER);
+
         IF_Consultas.setClosable(true);
         IF_Consultas.setTitle("Consulta Alumnos por Materia");
         IF_Consultas.setPreferredSize(new java.awt.Dimension(800, 600));
@@ -493,6 +622,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                 CB_Seleccion_MateriaItemStateChanged(evt);
             }
         });
+
         IF_Consultas.getContentPane().add(CB_Seleccion_Materia, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 180, 32));
 
         jDeskFondo.add(IF_Consultas, java.awt.BorderLayout.SOUTH);
@@ -750,7 +880,11 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_form_alumnoActionPerformed
 
     private void btn_Nuevo_MateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Nuevo_MateriaActionPerformed
-        // TODO add your handling code here:
+        JT_CodigoMateria.setText("");
+        JT_NombreMateria.setText("");
+        JT_AñoMateria.setText("");
+        RB_Activo_Materia.setSelected(false);      
+              
     }//GEN-LAST:event_btn_Nuevo_MateriaActionPerformed
 
     private void btn_Eliminar_MateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Eliminar_MateriaActionPerformed
@@ -770,11 +904,48 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_Eliminar_MateriaActionPerformed
 
     private void btn_Guardar_MateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Guardar_MateriaActionPerformed
-        // TODO add your handling code here:
+        MateriaData dataMateria = new MateriaData();        
+        
+        String codigo = JT_CodigoMateria.getText();                
+       
+        String nombre = JT_NombreMateria.getText();
+        //int año = Integer.parseInt(JT_AñoMateria.getText());     
+        String año = (JT_AñoMateria.getText());  
+        
+                 
+        boolean estado = RB_Activo_Materia.isSelected();
+        
+        if(codigo.isEmpty()){
+        
+           try{ 
+            if(JT_NombreMateria.getText().isEmpty() || JT_AñoMateria.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "El Campo NOMBRE y AÑO no deben estar vacios");
+            return;
+            }
+            Materia mat = new Materia(nombre, Integer.parseInt(año), estado);
+            dataMateria.guardarMateria(mat);
+            }catch(NumberFormatException nf){
+                JOptionPane.showMessageDialog(this,"Debe ingresar Año con un valor Entero");
+        }    
+        }else {  
+            try{
+             if(JT_NombreMateria.getText().isEmpty() || JT_AñoMateria.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "El Campo NOMBRE y AÑO no deben estar vacios");
+            return;   
+            }    
+            Materia mat1 = new Materia( Integer.parseInt(codigo),nombre, Integer.parseInt(año), estado );
+            dataMateria.modificarMateria(mat1);
+            }catch(NumberFormatException nf){
+                JOptionPane.showMessageDialog(this,"Debe ingresar Código con un valor Entero");
+                JT_CodigoMateria.setText("");
+                
+            }
     }//GEN-LAST:event_btn_Guardar_MateriaActionPerformed
-
+    }
     private void btn_Salir_MateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Salir_MateriaActionPerformed
-        // TODO add your handling code here:
+        
+        IF_Materia.setVisible(false);
+        
     }//GEN-LAST:event_btn_Salir_MateriaActionPerformed
                                                
     private void opcionSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionSalirActionPerformed
@@ -844,6 +1015,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         JT_Nombre.setText("");
         RB_Activo.setSelected(false);
         JDC_FechaNac.setDate(null);        
+
     }//GEN-LAST:event_btn_Nuevo_AlumnoActionPerformed
 
     private void btn_Eliminar_AlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Eliminar_AlumnoActionPerformed
@@ -1146,6 +1318,145 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                     model.addRow(new Object[]{materia.getId_materia(), materia.getNombre(), materia.getAnio_materia()});            
                 });
 
+
+            // Muestra los datos en los campos de información
+            JT_Apellido.setText(apellido);
+            JT_Nombre.setText(nombre);
+            JDC_FechaNac.setDate(utilDate);
+            RB_Activo_Alumno.setSelected(true);
+        } else {
+            // Si no se encontró un alumno, puedes manejarlo adecuadamente
+            JT_Apellido.setText("No se encontró el alumno");
+            JT_Nombre.setText("");
+        }
+    }//GEN-LAST:event_btn_BuscarActionPerformed
+    
+    public int obtenerIdMateria(String nombreMateria){
+        Conexion conex = new Conexion();
+        // Obtengo el ID de la materia seleccionada en función del nombre capturado en el comboBox
+                //String nombreMateriaSeleccionada = (String) CB_Seleccion_Materia.getSelectedItem();
+                
+                // Realizo la consulta sql para obtener el ID de la materia en función del nombre
+                String sqlObtenerIdMateria = "SELECT idMateria FROM materia WHERE nombre = ?";
+                int idMateriaSeleccionada = -1; // Valor predeterminado en caso de que no se encuentre la materia (no existe un item -1)
+                
+                try (PreparedStatement ps = conex.Conexion_Maria().prepareStatement(sqlObtenerIdMateria)) {
+                    ps.setString(1, nombreMateria); // Configura el parámetro con el nombre seleccionado
+                    ResultSet rs = ps.executeQuery();
+                    
+                    if (rs.next()) {
+                        idMateriaSeleccionada = rs.getInt("idMateria"); // Obtiene el ID de la materia
+                    }
+                } catch (SQLException e1) {
+                    System.out.println("Error al obtener el ID de la materia. ERROR: " + e1);
+                }
+        //System.out.println("El id de la materia " + nombreMateria + " es: " + idMateriaSeleccionada);
+        return idMateriaSeleccionada;
+    }
+    
+    private void CB_Seleccion_MateriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CB_Seleccion_MateriaItemStateChanged
+        
+        InscripcionData inscData = new InscripcionData();
+        String nombreMateria = (String) CB_Seleccion_Materia.getSelectedItem();
+        List<Alumno> alumnosEnMateria = inscData.obtenerAlumnoPorMateria(obtenerIdMateria(nombreMateria));
+        // Obtengo la lista de alumnos        
+
+        // Obtengo el modelo de la tabla existente
+        DefaultTableModel modeloTabla = (DefaultTableModel) TablaListAlumMateria.getModel();
+
+        // Limpia la tabla (borra todas las filas existentes)
+        modeloTabla.setRowCount(0);
+
+        // Itero sobre la lista de alumnos y agrego a cada alumno a la tabla
+        alumnosEnMateria.forEach((alumno) -> {
+            // Agrega una fila con los datos del alumno en el mismo orden que las columnas
+            modeloTabla.addRow(new Object[]{alumno.getId_alumno(), alumno.getDni(), alumno.getNombre(), alumno.getApellido()});
+        });
+
+        // Actualiza la tabla para que se muestren los nuevos datos
+        modeloTabla.fireTableDataChanged();
+          
+    }//GEN-LAST:event_CB_Seleccion_MateriaItemStateChanged
+
+    private void form_modNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_form_modNotasActionPerformed
+        eliminarInternalFrames();
+        IF_ModificacionNotas.setVisible(true);
+        
+        // Luego, cuando desees abrir la ventana interna:
+        if (IF_ModificacionNotas == null || IF_ModificacionNotas.isClosed()) {            
+            // Agregando la ventana interna al jDesktopPane1
+            jDesktopPane1.add(IF_ModificacionNotas);
+            IF_ModificacionNotas.setVisible(true); //hacerlo visible
+        }
+
+        // Me aseguro de manejar el evento de cierre para 'ocultar' en lugar de 'eliminar'
+        IF_ModificacionNotas.setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
+    }//GEN-LAST:event_form_modNotasActionPerformed
+
+    private void JCB_SelecAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCB_SelecAlumnosActionPerformed
+            // TODO add your handling code here:
+            
+            
+    }//GEN-LAST:event_JCB_SelecAlumnosActionPerformed
+
+    private void btn_GuardarNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarNotaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_GuardarNotaActionPerformed
+
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_SalirActionPerformed
+
+    private void RB_Activo_MateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RB_Activo_MateriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RB_Activo_MateriaActionPerformed
+
+    private void RB_Activo_AlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RB_Activo_AlumnoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RB_Activo_AlumnoActionPerformed
+
+    private void CB_Seleccion_MateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB_Seleccion_MateriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CB_Seleccion_MateriaActionPerformed
+
+    private void cargarMateriasComboBox() {
+        
+        Conexion conex = new Conexion();
+        // Usar un conjunto (Set) para almacenar las materias sin duplicados
+            Set<String> materias = new HashSet<>();
+        
+        try {
+            // Consulta SQL para obtener todas las materias sin repetir
+            String sql = "SELECT DISTINCT nombre FROM materia";
+            try (PreparedStatement ps = conex.Conexion_Maria().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                
+                ResultSet rs = ps.executeQuery();
+                
+                // Iterar a través de los resultados y agregar las materias al conjunto
+                while (rs.next()) {
+                    materias.add(rs.getString("nombre"));
+                }
+//                System.out.println("Estas son todas las materias");
+//                System.out.println(materias);
+                // Agregar las materias al JComboBox
+                materias.forEach((materia) -> { //uso una función operacional.
+                    CB_Seleccion_Materia.addItem(materia);
+                });
+                
+                
+                if (rs.next()) {
+                    //alumno.setId_alumno(rs.getInt("idAlumno"));
+                    JOptionPane.showMessageDialog(null, "Alumno añadido con exito.");
+                    
+                } 
+            }           
+                        
+        } catch (SQLException e) {
+            System.out.println("No se ha cargado el comboBox, error: " + e);
+            // Manejar cualquier excepción que pueda ocurrir durante la carga de datos
+        }
+    }
+
                 centrarCeldas(Tabla_Inscripciones); // Con esto me aseguro que las celdas estén centradas
 
             } else {                
@@ -1213,6 +1524,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         });             
     }
 
+
     /**
      * @param args the command line arguments
      */
@@ -1237,8 +1549,10 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JInternalFrame IF_Alumno;
     private javax.swing.JInternalFrame IF_Consultas;
     private javax.swing.JInternalFrame IF_Materia;
+
     private javax.swing.JInternalFrame IF_ModificacionNotas;
     private javax.swing.JComboBox<Object> JCB_SelecAlumnos;
+
     private com.toedter.calendar.JDateChooser JDC_FechaNac;
     private javax.swing.JMenu JM_Admin;
     private javax.swing.JMenu JM_Alumno;
@@ -1252,7 +1566,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JTextField JT_Nombre;
     private javax.swing.JTextField JT_NombreMateria;
     private javax.swing.JMenuBar Menu_Nav;
-    private javax.swing.JRadioButton RB_Activo;
+    private javax.swing.JRadioButton RB_Activo_Alumno;
     private javax.swing.JRadioButton RB_Activo_Materia;
     private javax.swing.JRadioButton RB_MateriasInsc;
     private javax.swing.JRadioButton RB_MateriasNoInsc;
