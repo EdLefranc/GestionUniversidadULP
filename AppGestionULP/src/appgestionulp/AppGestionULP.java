@@ -65,12 +65,16 @@ public class AppGestionULP {
         //dataAlumno.eliminarAlumno(1);
         
         //dataMateria.guardarMateria(mat1);
-        dataMateria.buscarMateria(3);
+        //dataMateria.buscarMateria(10);
         //dataMateria.eliminarmateria(6);
         //dataMateria.listarMaterias();
         //dataMateria.modificarMateria(mat1);
+
+        
         //insc.obtenerAlumnoPorMateria(5);
         //gui.obtenerIdMateria("Programacion 2");
+        
+
     }
 }
         
