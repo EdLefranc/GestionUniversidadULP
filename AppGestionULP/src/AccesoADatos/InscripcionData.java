@@ -143,7 +143,7 @@ public class InscripcionData {
         
         try {
             String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion, materia WHERE inscripcion.idMateria = materia.idMateria AND inscripcion.idAlumno = ?;";
-            String otraFormaSQL = "SELECT i.idMateria, nombre, año FROM inscripcion i JOIN materia ON(i.idMateria = m.idMateria) WHERE i.idAlumno = ?;";
+            String otraFormaSQL = "SELECT i.idMateria, nombre, año FROM inscripcion i JOIN materia ON(i.idMateria = materia.idMateria) WHERE i.idAlumno = ?;";
             try (PreparedStatement ps = conex.Conexion_Maria().prepareStatement(otraFormaSQL)) {
                 ps.setInt(1, id);
                 ResultSet rs = ps.executeQuery();
@@ -164,15 +164,18 @@ public class InscripcionData {
         System.out.println(materias);
         return materias;
     }
-    public List <Materia> obtenerMateriasNoCursadas(){
-        List <Materia> mat = new ArrayList<>();
+    
+    public List <Materia> obtenerMateriasNoCursadas(int id){
+        List <Materia> mat = new ArrayList<>();        
         
-        
-        try {
-            String sql = "SELECT materia.idMateria, materia.nombre, materia.año, materia.estado FROM materia WHERE materia.estado = 0";
+        try {            
+            //String sql = "SELECT i.idMateria, nombre, año FROM inscripcion i JOIN materia ON(i.idMateria = materia.idMateria) WHERE i.idAlumno = ? AND i.estado = 0;";
+            String sql = "SELECT materia.idMateria, materia.nombre, materia.año "
+                    + "FROM materia WHERE materia.idMateria "
+                    + "NOT IN (SELECT inscripcion.idMateria FROM inscripcion WHERE inscripcion.idAlumno = ?);";
             
             try (PreparedStatement ps = conex.Conexion_Maria().prepareStatement(sql)) {
-                //ps.setInt(1, id);
+                ps.setInt(1, id);
                 ResultSet rs = ps.executeQuery();
                 Materia materia;
                 
@@ -181,7 +184,7 @@ public class InscripcionData {
                     materia.setId_materia(rs.getInt("idMateria"));
                     materia.setNombre(rs.getString("nombre"));
                     materia.setAnio_materia(rs.getInt("año"));
-                    materia.setActivo(rs.getBoolean("estado"));
+                    //materia.setActivo(rs.getBoolean("estado"));
                     mat.add(materia);                    
                 }
             }
@@ -199,9 +202,27 @@ public class InscripcionData {
         
         
     }
-    
-    public void actualizarNota(int idMateria, double nota){
         
+    public void actualizarNota(int idMateria, double nota, int idAlumno){
+        try {
+            // Supongamos que tienes una tabla de inscripciones llamada "inscripcion"
+            String sql = "UPDATE inscripcion SET nota = ? WHERE idMateria = ? AND idAlumno = ?";
+            try (PreparedStatement ps = conex.Conexion_Maria().prepareStatement(sql)) {
+                ps.setDouble(1, nota);
+                ps.setInt(2, idMateria);
+                ps.setInt(3, idAlumno);
+
+                int rowsAffected = ps.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    System.out.println("Nota actualizada con éxito.");
+                } else {
+                    System.out.println("No se encontró la inscripción para actualizar la nota.");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar la nota: " + e.getMessage());
+        }
     }
        
     public List <Alumno> obtenerAlumnoPorMateria(int id){
@@ -236,11 +257,7 @@ public class InscripcionData {
         }
         //System.out.println("Los alumno son:\n" + alumnos);
         return alumnos;
-    }
-        
-       
-        
-    
+    }    
 }
 
 
