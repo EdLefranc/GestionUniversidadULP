@@ -54,39 +54,6 @@ public class AlumnoData {
 }
     }
     
-    
-    
-    public Alumno buscarAlumno(int dni) throws SQLException {
-        Alumno alumno = null;
-        String sql = "SELECT dni, apellido, nombre, fechaNacimiento FROM alumno WHERE dni = ? AND estado = 1";
-        PreparedStatement ps = null;
-        ArrayList<Alumno> alum = new ArrayList<>();    
-        
-        try {
-         ps = conex.Conexion_Maria().prepareStatement(sql);
-         ps.setInt(1,dni);
-         ResultSet rs = ps.executeQuery();
-
-         if (rs.next()) {
-             alumno=new Alumno();
-             //alumno.setId_alumno(id);
-             alumno.setDni(rs.getInt("dni"));
-             alumno.setApellido(rs.getString("apellido"));
-             alumno.setNombre(rs.getString("nombre"));
-             alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
-             alumno.setActivo(true);
-             alum.add(alumno);
-             System.out.println(alum);
-             //JOptionPane.showMessageDialog(null, "Alumno encontrado");
-             }              
-             ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno "+ex.getMessage());
-
-        }        
-        return alumno;        
-    }
-
     public static boolean esNumeroDNI(String str) {
         if (str == null || str.isEmpty()) { // Evalúa que no sea un campo vacío
             return false;
@@ -106,33 +73,34 @@ public class AlumnoData {
         }
     }
     
-
+    //Buscar Alumno
     public Alumno buscarAlumno(int dni) throws SQLException {
-
         Alumno alumno = null;
+        String sql = "SELECT dni, apellido, nombre, fechaNacimiento FROM alumno WHERE dni = ? AND estado = 1";
+        PreparedStatement ps = null;
         ArrayList<Alumno> alum = new ArrayList<>();
-        String sql = "SELECT idAlumno, dni, apellido, nombre, fechaNacimiento FROM alumno WHERE dni=? AND estado = 1";
-        PreparedStatement ps = null;    
         
-        try {                
+        if (!esNumeroDNI(String.valueOf(dni))) {
+            JOptionPane.showMessageDialog(null, "El número no corresponde a un DNI o hay campos vacíos.\nIngrese un DNI válido por favor.");
+            System.out.println("El valor de 'dni' no es un entero válido o tiene más de 8 dígitos.");
+        } else {
+            System.out.println("El valor de 'dni' es un entero válido y tiene 8 o menos dígitos.");
+        }
+        
+        try {
             ps = conex.Conexion_Maria().prepareStatement(sql);
-            ps.setInt(1,dni );
+            ps.setInt(1,dni);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 alumno=new Alumno();
-                alumno.setId_alumno(rs.getInt("idAlumno"));
+                //alumno.setId_alumno(id);
                 alumno.setDni(rs.getInt("dni"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
-                alumno.setActivo(true); 
+                alumno.setActivo(true);
                 alum.add(alumno);
-
-                //System.out.println(alum);
-                } 
-            ps.close();
-
                 System.out.println(alum);
                 JOptionPane.showMessageDialog(null, "Alumno encontrado");
                 } else{
@@ -182,37 +150,37 @@ public class AlumnoData {
 
         }
         ps.close();
-
         } catch (SQLException ex) {
         JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno "+ex.getMessage());
-        }
-            return alumno;       
-    }
+        }       
+        return alumno;       
+}
 
     //Listado de Alumnos
     public List<Alumno> listarAlumnos() {
         
         List<Alumno> alumnos = new ArrayList<>();
         try {
-        String sql = "SELECT * FROM alumno WHERE estado = 1";
-            try (PreparedStatement ps = conex.Conexion_Maria().prepareStatement(sql)) {
-                ResultSet rs = ps.executeQuery();
-                while (rs.next()) {
-                    Alumno alumno = new Alumno();
-                    
-                    alumno.setId_alumno(rs.getInt("idAlumno"));
-                    alumno.setDni(rs.getInt("dni"));
-                    alumno.setApellido(rs.getString("apellido"));
-                    alumno.setNombre(rs.getString("nombre"));
-                    alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
-                    alumno.setActivo(rs.getBoolean("estado"));
-                    alumnos.add(alumno);
-                }   }        
+        String sql = "SELECT * FROM alumno WHERE estado = 1 ";
+        PreparedStatement ps = conex.Conexion_Maria().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Alumno alumno = new Alumno();
+
+            alumno.setId_alumno(rs.getInt("idAlumno"));
+            alumno.setDni(rs.getInt("dni"));
+            alumno.setApellido(rs.getString("apellido"));
+            alumno.setNombre(rs.getString("nombre"));
+            alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
+            alumno.setActivo(rs.getBoolean("estado"));
+            alumnos.add(alumno);            
+        }
+        ps.close();        
         
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno "+ex.getMessage());
         }
-        //System.out.println(alumnos);
+        System.out.println(alumnos);
         return alumnos;
 }
 
@@ -258,5 +226,42 @@ public class AlumnoData {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno");
         }
-    }      
+    }
+
+       
+       
+       
 }
+
+
+/*
+
+public static boolean esNumeroDNI(String str) {
+    if (str == null || str.isEmpty()) {
+        return false;
+    }
+
+    for (char c : str.toCharArray()) {
+        if (!Character.isDigit(c)) {
+            return false; // No es un número válido.
+        }
+    }
+
+    try {
+        int dni = Integer.parseInt(str); // Intenta convertir a entero.
+        return dni > 999999 && dni < 99999999;
+    } catch (NumberFormatException e) {
+        return false; // No se pudo convertir a entero.
+    }
+}
+
+// En tu método buscarAlumno:
+if (!esNumeroDNI(String.valueOf(dni))) {
+    JOptionPane.showMessageDialog(null, "El valor ingresado no es un DNI válido.\nIngrese un DNI válido por favor.");
+    System.out.println("El valor de 'dni' no es un entero válido o tiene más de 8 dígitos.");
+} else {
+    System.out.println("El valor de 'dni' es un entero válido y tiene 8 o menos dígitos.");
+}
+
+
+*/
