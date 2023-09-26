@@ -196,9 +196,26 @@ public class InscripcionData {
         return mat;
         
     }
-    
-    public void borrarInscripcionMateriaAlumno(int idAlumno, int idMateria){
         
+    public void borrarInscripcionMateriaAlumno(int idAlumno, int idMateria){
+        String sql = "DELETE FROM inscripcion WHERE idAlumno = ? AND idMateria = ?";
+    
+        try {
+            try (PreparedStatement ps = conex.Conexion_Maria().prepareStatement(sql)) {
+                ps.setInt(1, idAlumno);
+                ps.setInt(2, idMateria);
+
+                int filasAfectadas = ps.executeUpdate();
+
+                if (filasAfectadas > 0) {
+                    JOptionPane.showMessageDialog(null, "Alumno desinscripto de la materia.");
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se encontró una inscripción válida para eliminar.");
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar la inscripción: " + ex.getMessage());
+        }
         
         
     }
@@ -259,43 +276,3 @@ public class InscripcionData {
         return alumnos;
     }    
 }
-
-
-/*
-
-public List<Alumno> obtenerAlumnoPorMateria(int idMateria) {
-    Conexion conn = new Conexion();
-    List<Alumno> alumnos = new ArrayList<>();
-
-    try {
-        String sql = "SELECT alumno.idAlumno, alumno.dni, alumno.apellido, alumno.nombre " +
-                     "FROM alumno " +
-                     "INNER JOIN inscripcion ON alumno.idAlumno = inscripcion.idAlumno " +
-                     "WHERE inscripcion.idMateria = ?";
-        
-        try (PreparedStatement ps = conn.Conexion_Maria().prepareStatement(sql)) {
-            ps.setInt(1, idMateria);
-            ResultSet rs = ps.executeQuery();
-            
-            while (rs.next()) {
-                Alumno alumno = new Alumno();
-                
-                alumno.setId_alumno(rs.getInt("idAlumno"));
-                alumno.setDni(rs.getInt("dni"));
-                alumno.setApellido(rs.getString("apellido"));
-                alumno.setNombre(rs.getString("nombre"));
-                
-                alumnos.add(alumno);
-            }
-        }
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno " + ex.getMessage());
-        System.out.println("El error es: " + ex);
-    }
-    
-    System.out.println("Los alumnos son:\n" + alumnos);
-    return alumnos;
-}
-
-
-*/
