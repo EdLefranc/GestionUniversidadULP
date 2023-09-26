@@ -61,10 +61,12 @@ public Materia buscarMateria(int id) throws SQLException {
                 materia.setAnio_materia(rs.getInt("año"));
                 materia.setActivo(true);
                 materias.add(materia);
-//                System.out.println(materias);
+                System.out.println(materias);
                 JOptionPane.showMessageDialog(null, "Materia encontrada");
-                }       
-                ps.close();                      
+                } else{
+                JOptionPane.showMessageDialog(null, "No existe la materia");       
+                ps.close(); 
+            }               
                      
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia "+ex.getMessage());
