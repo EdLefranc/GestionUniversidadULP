@@ -110,8 +110,6 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         Tabla_Notas = new javax.swing.JTable();
         btn_GuardarNota = new javax.swing.JButton();
-        btn_Salir = new javax.swing.JButton();
-        btn_mostrarMateriasNotas = new javax.swing.JButton();
         Menu_Nav = new javax.swing.JMenuBar();
         JM_Alumno = new javax.swing.JMenu();
         form_alumno = new javax.swing.JMenuItem();
@@ -548,16 +546,6 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
             }
         });
 
-        btn_Salir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btn_Salir.setText("Salir");
-
-        btn_mostrarMateriasNotas.setText("Mostrar Materias y Notas");
-        btn_mostrarMateriasNotas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_mostrarMateriasNotasActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout IF_ModificacionNotasLayout = new javax.swing.GroupLayout(IF_ModificacionNotas.getContentPane());
         IF_ModificacionNotas.getContentPane().setLayout(IF_ModificacionNotasLayout);
         IF_ModificacionNotasLayout.setHorizontalGroup(
@@ -577,14 +565,9 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                         .addGap(28, 28, 28)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(IF_ModificacionNotasLayout.createSequentialGroup()
-                        .addGap(177, 177, 177)
-                        .addComponent(btn_GuardarNota, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(btn_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(IF_ModificacionNotasLayout.createSequentialGroup()
-                        .addGap(235, 235, 235)
-                        .addComponent(btn_mostrarMateriasNotas, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(294, 294, 294)
+                        .addComponent(btn_GuardarNota, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         IF_ModificacionNotasLayout.setVerticalGroup(
             IF_ModificacionNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -595,15 +578,11 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                 .addGroup(IF_ModificacionNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JCB_SelecAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_mostrarMateriasNotas, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addGroup(IF_ModificacionNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_GuardarNota)
-                    .addComponent(btn_Salir))
-                .addGap(69, 69, 69))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(btn_GuardarNota)
+                .addGap(49, 49, 49))
         );
 
         jDeskFondo.add(IF_ModificacionNotas, java.awt.BorderLayout.EAST);
@@ -1135,24 +1114,6 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         centrarCeldas(Tabla_Inscripciones); // Con esto me aseguro que las celdas estén centradas
     }
         
-    private void btn_mostrarMateriasNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_mostrarMateriasNotasActionPerformed
-        Materia mat = new Materia();
-        InscripcionData inscData = new InscripcionData();
-        Alumno alum = (Alumno) JCB_SelecAlumnos.getSelectedItem();
-        
-        int filaSeleccionada = Tabla_Notas.getSelectedRow();
-        if (filaSeleccionada != -1) {
-            int idMateria = Integer.parseInt(Tabla_Notas.getValueAt(filaSeleccionada, 0).toString());
-            int idAlumno = alum.getId_alumno();
-            double notaMateria = Double.parseDouble(Tabla_Notas.getValueAt(filaSeleccionada, 2).toString());
-            
-            List<Inscripcion> listaInscripciones = inscData.obtenerInscripcionesPorAlumno(idAlumno);
-            refrescarTablaNotas(mat, listaInscripciones);
-        }else{
-            
-        }
-    }//GEN-LAST:event_btn_mostrarMateriasNotasActionPerformed
-
     
     
     private void btn_InscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InscripcionActionPerformed
@@ -1181,7 +1142,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         refrescarTabla(listMaterias);   
         
         }else{
-            JOptionPane.showMessageDialog(null, "Selecciona un alumno por favor.");
+            JOptionPane.showMessageDialog(null, "Selecciona un item por favor.");
         }
     }//GEN-LAST:event_btn_InscripcionActionPerformed
 
@@ -1206,7 +1167,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         refrescarTabla(listMaterias);   
         
         }else{
-           JOptionPane.showMessageDialog(null, "Selecciona un alumno por favor."); 
+           JOptionPane.showMessageDialog(null, "Selecciona un item por favor."); 
         }
     }//GEN-LAST:event_btn_AnularInscActionPerformed
             
@@ -1222,36 +1183,42 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         int filaSeleccionada = Tabla_Notas.getSelectedRow();
         if (filaSeleccionada != -1) {
             int idMateria = Integer.parseInt(Tabla_Notas.getValueAt(filaSeleccionada, 0).toString());
-            int idAlumno = alum.getId_alumno();
-            double notaMateria = Double.parseDouble(Tabla_Notas.getValueAt(filaSeleccionada, 2).toString());
+            int idAlumno = alum.getId_alumno();            
             
-            List<Inscripcion> listaInscripciones = inscData.obtenerInscripcionesPorAlumno(idAlumno);
+            // Obtén el valor de la celda editada            
+            int columnaNota = 2; // La columna "Nota" es la tercera columna (0, 1, 2)
+            double nuevaNota = (double) Tabla_Notas.getValueAt(filaSeleccionada, columnaNota);
+            
+            List<Inscripcion> listaInscripciones = inscData.obtenerInscripcionesPorAlumno2(idAlumno);
             refrescarTablaNotas(mat, listaInscripciones);
             
-            inscData.actualizarNota(idMateria, notaMateria, idAlumno);
+            inscData.actualizarNota(idMateria, nuevaNota, idAlumno);
+            actualizarTablaNotas();
             }else{
-            JOptionPane.showMessageDialog(null, "Selecciona un alumno por favor");
+            JOptionPane.showMessageDialog(null, "Selecciona una nota para modificar por favor");
         }
     }//GEN-LAST:event_btn_GuardarNotaActionPerformed
     
-      
     public void refrescarTablaNotas(Materia materia, List<Inscripcion> lista){
         // Llenar la JTable Tabla_Notas con los datos de obtenerInscripcionesPorAlumno()
         DefaultTableModel model = (DefaultTableModel) Tabla_Notas.getModel();
         model.setRowCount(0); // Limpiar la tabla antes de llenarla
 
         lista.forEach((inscripcion) -> {
-            model.addRow(new Object[]{inscripcion.getId_inscripcion(), materia.getNombre(), inscripcion.getNota()});            
+        model.addRow(new Object[]{inscripcion.getMateria().getId_materia(), inscripcion.getMateria().getNombre(), inscripcion.getNota()});
         });
 
         centrarCeldas(Tabla_Notas); // Con esto me aseguro que las celdas estén centradas
     }
-       
-    private void JCB_SelecAlumnosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JCB_SelecAlumnosItemStateChanged
+    
+    public void actualizarTablaNotas(){
         InscripcionData inscData = new InscripcionData();
         int idAlumno = ((Alumno) JCB_SelecAlumnos.getSelectedItem()).getId_alumno();
-
-        List<Inscripcion> inscripciones = inscData.obtenerInscripcionesPorAlumno(idAlumno);
+        MateriaData matData = new MateriaData();
+        
+//        matData.buscarMateria(WIDTH)
+        
+        List<Inscripcion> inscripciones = inscData.obtenerInscripcionesPorAlumno2(idAlumno);
 
         // Obtengo el modelo de la tabla existente
         DefaultTableModel modeloTabla = (DefaultTableModel) Tabla_Notas.getModel();
@@ -1269,6 +1236,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
 
         // Actualiza la tabla para que se muestren los nuevos datos
         modeloTabla.fireTableDataChanged();
+
     }//GEN-LAST:event_JCB_SelecAlumnosItemStateChanged
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -1277,7 +1245,14 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    }
+
     
+    private void JCB_SelecAlumnosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JCB_SelecAlumnosItemStateChanged
+        actualizarTablaNotas();
+    }//GEN-LAST:event_JCB_SelecAlumnosItemStateChanged
+       
     private void centrarCeldas(JTable tabla){
         // Configurar el centrado de las celdas en la tabla
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -1373,8 +1348,6 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JButton btn_Inscripcion;
     private javax.swing.JButton btn_Nuevo_Alumno;
     private javax.swing.JButton btn_Nuevo_Materia;
-    private javax.swing.JButton btn_Salir;
-    private javax.swing.JButton btn_mostrarMateriasNotas;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JMenu cambiarTema;
     private javax.swing.JMenuItem consulta_alumMaterias;
