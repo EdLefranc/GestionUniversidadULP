@@ -77,6 +77,33 @@ public Materia buscarMateria(int id) throws SQLException {
     }
 
 
+public Materia buscarMateriaPorNombre(String nombre) throws SQLException {
+    Materia materia = null;
+    String sql = "SELECT materia.idMateria, materia.nombre, materia.año, materia.estado"
+            + " FROM materia WHERE LOWER(nombre) = LOWER(?) AND estado = 1";
+    PreparedStatement ps = null;
+    List<Materia> materias = new ArrayList<>();
+    try {
+        ps = conex.Conexion_Maria().prepareStatement(sql);
+        ps.setString(1, nombre.toLowerCase()); // Convertir el nombre a minúsculas
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            materia = new Materia();
+            materia.setId_materia(rs.getInt("idMateria"));
+            materia.setNombre(rs.getString("nombre"));
+            materia.setAnio_materia(rs.getInt("año"));
+            materia.setActivo(true);
+            materias.add(materia);
+        }
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia " + ex.getMessage());
+    }
+
+    return materia;
+}
+
 public void modificarMateria (Materia materia){
 String sql = "UPDATE materia SET nombre = ?, año = ?, estado = ? WHERE idMateria = ?";
         PreparedStatement ps = null;
