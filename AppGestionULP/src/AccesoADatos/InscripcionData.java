@@ -99,8 +99,39 @@ public class InscripcionData {
         System.out.println("Las inscripciones son: \n" + inscripciones);
         return inscripciones;
     }
-    
-    
+          
+    public List<Inscripcion> obtenerInscripcionesPorAlumno2(int id) {
+        List<Inscripcion> inscripciones = new ArrayList<>();
+        String sql = "SELECT inscripcion.idMateria, materia.nombre, inscripcion.nota " // Solo seleccionar las columnas necesarias
+        + "FROM inscripcion "
+        + "JOIN materia ON inscripcion.idMateria = materia.idMateria "
+        + "WHERE inscripcion.idAlumno = ?";
+        try {
+            try (PreparedStatement ps = conex.Conexion_Maria().prepareStatement(sql)) {
+                ps.setInt(1, id);
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    Inscripcion insc = new Inscripcion();
+                    Materia materia = new Materia();
+
+                    materia.setId_materia(rs.getInt("idMateria"));
+                    materia.setNombre(rs.getString("nombre"));
+
+                    insc.setMateria(materia);
+                    insc.setNota(rs.getDouble("nota"));
+
+                    inscripciones.add(insc);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener las inscripciones del alumno. ERROR: " + e);
+        }
+        System.out.println("Las inscripciones son: \n" + inscripciones);
+        return inscripciones;
+    }
+
+       
     public List <Inscripcion> obtenerInscripcionesPorAlumno(int id){ // = new List<>(int id);
         List<Inscripcion> inscripciones = new ArrayList<>();
         String sql = "SELECT inscripcion.idInscripcion, inscripcion.nota, inscripcion.idAlumno, inscripcion.idMateria " // se puede usar SELECT * ya que se consulta portadas las columnas
@@ -135,6 +166,7 @@ public class InscripcionData {
         System.out.println("Las inscripciones son: \n" + inscripciones);        
         return inscripciones;        
     } 
+        
     
     //Obtención de las materias que están siendo cursadas por un alumno.
     public List <Materia> obtenerMateriasCursadas(int id){
