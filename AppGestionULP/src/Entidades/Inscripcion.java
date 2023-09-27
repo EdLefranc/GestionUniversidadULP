@@ -65,7 +65,7 @@ public class Inscripcion {
 
     @Override
     public String toString() {
-        String insc= "| legajo: " + id_inscripcion + " | nombre: " + materia.getNombre() + " | nota: " + nota;
+        String insc= "| legajo: " + id_inscripcion + " | nota: " + nota + " | id alumno: " + alumno.getId_alumno() + " | id materia: " + materia.getId_materia() + "\n";
         return insc;
     }
     
