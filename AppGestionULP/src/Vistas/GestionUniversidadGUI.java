@@ -124,6 +124,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         darkTheme = new javax.swing.JMenuItem();
         lightTheme = new javax.swing.JMenuItem();
         Soporte = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         JM_Salir = new javax.swing.JMenu();
         opcionSalir = new javax.swing.JMenuItem();
 
@@ -681,6 +682,15 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         Soporte.setText("Equipo");
         Soporte.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         Soporte.setIconTextGap(25);
+
+        jMenuItem1.setText("EQUIPO 39");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        Soporte.add(jMenuItem1);
+
         Menu_Nav.add(Soporte);
 
         JM_Salir.setText("Salir");
@@ -728,7 +738,12 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_form_alumnoActionPerformed
 
     private void btn_Nuevo_MateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Nuevo_MateriaActionPerformed
-        // TODO add your handling code here:
+        
+        JT_CodigoMateria.setText("");
+        JT_NombreMateria.setText("");
+        JT_AñoMateria.setText("");
+        RB_Activo_Materia.setSelected(false);
+        
     }//GEN-LAST:event_btn_Nuevo_MateriaActionPerformed
 
     private void btn_Guardar_MateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Guardar_MateriaActionPerformed
@@ -1221,7 +1236,18 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
 
         // Actualiza la tabla para que se muestren los nuevos datos
         modeloTabla.fireTableDataChanged();
+
+    }//GEN-LAST:event_JCB_SelecAlumnosItemStateChanged
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       
+      JOptionPane.showMessageDialog(null, "INTEGRANTES: \n Eduardo Andres Cardozo \n Julio Cesar Silvero Gonzalez \n Sebastian Zuluaga Piedrahita \n Marcelo Claudio Garcia");  
+        
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     }
+
     
     private void JCB_SelecAlumnosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JCB_SelecAlumnosItemStateChanged
         actualizarTablaNotas();
@@ -1348,6 +1374,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
