@@ -62,8 +62,8 @@ public Materia buscarMateria(int id) throws SQLException {
                 materia.setActivo(true);
                 materias.add(materia);
 //                System.out.println(materias);
-//                JOptionPane.showMessageDialog(null, "Materia encontrada");
-                }        
+                JOptionPane.showMessageDialog(null, "Materia encontrada");
+                }       
                 ps.close();                      
                      
         } catch (SQLException ex) {
