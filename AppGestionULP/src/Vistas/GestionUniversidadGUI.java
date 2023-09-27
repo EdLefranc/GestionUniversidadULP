@@ -7,8 +7,10 @@ import AccesoADatos.MateriaData;
 import Entidades.Alumno;
 import Entidades.Inscripcion;
 import Entidades.Materia;
+import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatSpacegrayIJTheme;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatLightOwlIJTheme;
+import java.awt.event.ItemEvent;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -53,6 +55,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jProgressBar1 = new javax.swing.JProgressBar();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jDeskFondo = new javax.swing.JDesktopPane();
         IF_Alumno = new javax.swing.JInternalFrame();
         jLabel1 = new javax.swing.JLabel();
@@ -69,7 +72,6 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         JDC_FechaNac = new com.toedter.calendar.JDateChooser();
         btn_Guardar_Alumno = new javax.swing.JButton();
         btn_Nuevo_Alumno = new javax.swing.JButton();
-        btn_Eliminar_Alumno = new javax.swing.JButton();
         IF_Materia = new javax.swing.JInternalFrame();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -81,7 +83,6 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         btn_Buscar_Cod_Materia = new javax.swing.JButton();
         btn_Nuevo_Materia = new javax.swing.JButton();
         btn_Guardar_Materia = new javax.swing.JButton();
-        btn_Salir_Materia = new javax.swing.JButton();
         JT_NombreMateria = new javax.swing.JTextField();
         JT_AñoMateria = new javax.swing.JTextField();
         IF_Administracion = new javax.swing.JInternalFrame();
@@ -93,8 +94,9 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         RB_MateriasNoInsc = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla_Inscripciones = new javax.swing.JTable();
-        BTN_Inscripcion = new javax.swing.JButton();
-        BTN_AnularInsc = new javax.swing.JButton();
+        btn_Inscripcion = new javax.swing.JButton();
+        btn_AnularInsc = new javax.swing.JButton();
+        RB_Ninguno = new javax.swing.JRadioButton();
         IF_Consultas = new javax.swing.JInternalFrame();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -108,8 +110,6 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         Tabla_Notas = new javax.swing.JTable();
         btn_GuardarNota = new javax.swing.JButton();
-        btn_Salir = new javax.swing.JButton();
-        btn_mostrarMateriasNotas = new javax.swing.JButton();
         Menu_Nav = new javax.swing.JMenuBar();
         JM_Alumno = new javax.swing.JMenu();
         form_alumno = new javax.swing.JMenuItem();
@@ -124,6 +124,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         darkTheme = new javax.swing.JMenuItem();
         lightTheme = new javax.swing.JMenuItem();
         Soporte = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         JM_Salir = new javax.swing.JMenu();
         opcionSalir = new javax.swing.JMenuItem();
 
@@ -191,13 +192,13 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         IF_Alumno.getContentPane().add(JDC_FechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, 313, 40));
 
         btn_Guardar_Alumno.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btn_Guardar_Alumno.setText("Guardar");
+        btn_Guardar_Alumno.setText("Guardar - Actualizar");
         btn_Guardar_Alumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_Guardar_AlumnoActionPerformed(evt);
             }
         });
-        IF_Alumno.getContentPane().add(btn_Guardar_Alumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 480, -1, -1));
+        IF_Alumno.getContentPane().add(btn_Guardar_Alumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 480, 220, -1));
 
         btn_Nuevo_Alumno.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btn_Nuevo_Alumno.setText("Nuevo");
@@ -206,18 +207,9 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                 btn_Nuevo_AlumnoActionPerformed(evt);
             }
         });
-        IF_Alumno.getContentPane().add(btn_Nuevo_Alumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 480, -1, -1));
+        IF_Alumno.getContentPane().add(btn_Nuevo_Alumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 480, 130, -1));
 
-        btn_Eliminar_Alumno.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btn_Eliminar_Alumno.setText("Eliminar");
-        btn_Eliminar_Alumno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_Eliminar_AlumnoActionPerformed(evt);
-            }
-        });
-        IF_Alumno.getContentPane().add(btn_Eliminar_Alumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 480, -1, -1));
-
-        jDeskFondo.add(IF_Alumno, java.awt.BorderLayout.EAST);
+        jDeskFondo.add(IF_Alumno, java.awt.BorderLayout.SOUTH);
 
         IF_Materia.setClosable(true);
         IF_Materia.setTitle("Formulario de Materias");
@@ -239,7 +231,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel11.setText("Estado:");
 
-        RB_Activo_Materia.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        RB_Activo_Materia.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         RB_Activo_Materia.setText("Activo");
 
         btn_Buscar_Cod_Materia.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -259,18 +251,12 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         });
 
         btn_Guardar_Materia.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btn_Guardar_Materia.setText("Guardar/Actualizar");
+
+        btn_Guardar_Materia.setText("Guardar - Actualizar");
+
         btn_Guardar_Materia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_Guardar_MateriaActionPerformed(evt);
-            }
-        });
-
-        btn_Salir_Materia.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btn_Salir_Materia.setText("Salir");
-        btn_Salir_Materia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_Salir_MateriaActionPerformed(evt);
             }
         });
 
@@ -278,41 +264,42 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         IF_Materia.getContentPane().setLayout(IF_MateriaLayout);
         IF_MateriaLayout.setHorizontalGroup(
             IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(IF_MateriaLayout.createSequentialGroup()
-                .addContainerGap(94, Short.MAX_VALUE)
+
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IF_MateriaLayout.createSequentialGroup()
+                .addContainerGap(154, Short.MAX_VALUE)
                 .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IF_MateriaLayout.createSequentialGroup()
-                        .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(IF_MateriaLayout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel11))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JT_AñoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(RB_Activo_Materia)
-                            .addComponent(JT_NombreMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(320, 320, 320))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IF_MateriaLayout.createSequentialGroup()
-                        .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IF_MateriaLayout.createSequentialGroup()
-                                .addComponent(btn_Nuevo_Materia)
-                                .addGap(38, 38, 38)
-                                .addComponent(btn_Guardar_Materia)
-                                .addGap(47, 47, 47)
-                                .addComponent(btn_Salir_Materia))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(IF_MateriaLayout.createSequentialGroup()
-                                    .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(IF_MateriaLayout.createSequentialGroup()
-                                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(JT_CodigoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jLabel7))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(btn_Buscar_Cod_Materia, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(154, 154, 154))))
+                    .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(IF_MateriaLayout.createSequentialGroup()
+                            .addComponent(jLabel9)
+                            .addGap(65, 65, 65)
+                            .addComponent(JT_NombreMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(IF_MateriaLayout.createSequentialGroup()
+                            .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel10)
+                                .addComponent(jLabel11))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(RB_Activo_Materia)
+                                .addComponent(JT_AñoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(IF_MateriaLayout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65)
+                        .addComponent(JT_CodigoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(70, 70, 70)
+                .addComponent(btn_Buscar_Cod_Materia, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(134, 134, 134))
+            .addGroup(IF_MateriaLayout.createSequentialGroup()
+                .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(IF_MateriaLayout.createSequentialGroup()
+                        .addGap(331, 331, 331)
+                        .addComponent(jLabel7))
+                    .addGroup(IF_MateriaLayout.createSequentialGroup()
+                        .addGap(194, 194, 194)
+                        .addComponent(btn_Nuevo_Materia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_Guardar_Materia, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(185, 185, 185))
+
         );
         IF_MateriaLayout.setVerticalGroup(
             IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -340,14 +327,15 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                     .addComponent(JT_AñoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
                 .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(RB_Activo_Materia))
-                .addGap(50, 50, 50)
+
+                    .addComponent(RB_Activo_Materia)
+                    .addComponent(jLabel11))
+                .addGap(60, 60, 60)
                 .addGroup(IF_MateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_Guardar_Materia)
                     .addComponent(btn_Nuevo_Materia)
-                    .addComponent(btn_Salir_Materia))
-                .addContainerGap(400, Short.MAX_VALUE))
+                    .addComponent(btn_Guardar_Materia))
+                .addGap(115, 115, 115))
+
         );
 
         jDeskFondo.add(IF_Materia, java.awt.BorderLayout.WEST);
@@ -368,12 +356,18 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         IF_Administracion.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, -1, 30));
 
         CB_SeleccionAlumno.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        CB_SeleccionAlumno.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CB_SeleccionAlumnoItemStateChanged(evt);
+            }
+        });
         IF_Administracion.getContentPane().add(CB_SeleccionAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 390, 30));
 
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel13.setText("Listado de Materias");
         IF_Administracion.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, -1, -1));
 
+        buttonGroup1.add(RB_MateriasInsc);
         RB_MateriasInsc.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         RB_MateriasInsc.setText("Materias Inscriptas");
         RB_MateriasInsc.addActionListener(new java.awt.event.ActionListener() {
@@ -383,6 +377,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         });
         IF_Administracion.getContentPane().add(RB_MateriasInsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, -1, -1));
 
+        buttonGroup1.add(RB_MateriasNoInsc);
         RB_MateriasNoInsc.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         RB_MateriasNoInsc.setText("Materias no Inscriptas");
         RB_MateriasNoInsc.addActionListener(new java.awt.event.ActionListener() {
@@ -424,13 +419,28 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
 
         IF_Administracion.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 740, 150));
 
-        BTN_Inscripcion.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        BTN_Inscripcion.setText("Inscripción");
-        IF_Administracion.getContentPane().add(BTN_Inscripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 490, -1, -1));
+        btn_Inscripcion.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btn_Inscripcion.setText("Inscripción");
+        btn_Inscripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_InscripcionActionPerformed(evt);
+            }
+        });
+        IF_Administracion.getContentPane().add(btn_Inscripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 490, -1, -1));
 
-        BTN_AnularInsc.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        BTN_AnularInsc.setText("Anular Inscripción");
-        IF_Administracion.getContentPane().add(BTN_AnularInsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 490, -1, -1));
+        btn_AnularInsc.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btn_AnularInsc.setText("Anular Inscripción");
+        btn_AnularInsc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AnularInscActionPerformed(evt);
+            }
+        });
+        IF_Administracion.getContentPane().add(btn_AnularInsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 490, -1, -1));
+
+        buttonGroup1.add(RB_Ninguno);
+        RB_Ninguno.setSelected(true);
+        RB_Ninguno.setText("Ninguno");
+        IF_Administracion.getContentPane().add(RB_Ninguno, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 220, -1, -1));
 
         jDeskFondo.add(IF_Administracion, java.awt.BorderLayout.NORTH);
 
@@ -485,7 +495,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         });
         IF_Consultas.getContentPane().add(CB_Seleccion_Materia, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 180, 32));
 
-        jDeskFondo.add(IF_Consultas, java.awt.BorderLayout.SOUTH);
+        jDeskFondo.add(IF_Consultas, java.awt.BorderLayout.CENTER);
 
         IF_ModificacionNotas.setClosable(true);
         IF_ModificacionNotas.setTitle("Cargar Notas");
@@ -500,9 +510,9 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         jLabel14.setText("Seleccione un alumno");
 
         JCB_SelecAlumnos.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        JCB_SelecAlumnos.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                JCB_SelecAlumnosKeyReleased(evt);
+        JCB_SelecAlumnos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                JCB_SelecAlumnosItemStateChanged(evt);
             }
         });
 
@@ -523,7 +533,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                 java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -538,14 +548,9 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
 
         btn_GuardarNota.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btn_GuardarNota.setText("Guardar");
-
-        btn_Salir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btn_Salir.setText("Salir");
-
-        btn_mostrarMateriasNotas.setText("Mostrar Materias y Notas");
-        btn_mostrarMateriasNotas.addActionListener(new java.awt.event.ActionListener() {
+        btn_GuardarNota.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_mostrarMateriasNotasActionPerformed(evt);
+                btn_GuardarNotaActionPerformed(evt);
             }
         });
 
@@ -568,14 +573,11 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                         .addGap(28, 28, 28)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(IF_ModificacionNotasLayout.createSequentialGroup()
-                        .addGap(177, 177, 177)
-                        .addComponent(btn_GuardarNota, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(btn_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(IF_ModificacionNotasLayout.createSequentialGroup()
-                        .addGap(235, 235, 235)
-                        .addComponent(btn_mostrarMateriasNotas, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+
+                        .addGap(294, 294, 294)
+                        .addComponent(btn_GuardarNota, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
+
         );
         IF_ModificacionNotasLayout.setVerticalGroup(
             IF_ModificacionNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -586,18 +588,16 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                 .addGroup(IF_ModificacionNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JCB_SelecAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_mostrarMateriasNotas, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addGroup(IF_ModificacionNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_GuardarNota)
-                    .addComponent(btn_Salir))
-                .addGap(69, 69, 69))
+
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(btn_GuardarNota)
+                .addGap(49, 49, 49))
+
         );
 
-        jDeskFondo.add(IF_ModificacionNotas, java.awt.BorderLayout.CENTER);
+        jDeskFondo.add(IF_ModificacionNotas, java.awt.BorderLayout.EAST);
 
         getContentPane().add(jDeskFondo);
 
@@ -694,6 +694,15 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         Soporte.setText("Equipo");
         Soporte.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         Soporte.setIconTextGap(25);
+
+        jMenuItem1.setText("EQUIPO 39");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        Soporte.add(jMenuItem1);
+
         Menu_Nav.add(Soporte);
 
         JM_Salir.setText("Salir");
@@ -727,6 +736,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private void form_alumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_form_alumnoActionPerformed
         eliminarInternalFrames();
         IF_Alumno.setVisible(true);
+        JDC_FechaNac.getDateEditor().setEnabled(false);
         
         // Luego, cuando desees abrir la ventana interna:
         if (IF_Alumno == null || IF_Alumno.isClosed()) {            
@@ -738,6 +748,21 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         // Me aseguro de manejar el evento de cierre para 'ocultar' en lugar de 'eliminar'
         IF_Alumno.setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
     }//GEN-LAST:event_form_alumnoActionPerformed
+
+
+    private void btn_Nuevo_MateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Nuevo_MateriaActionPerformed
+        
+        JT_CodigoMateria.setText("");
+        JT_NombreMateria.setText("");
+        JT_AñoMateria.setText("");
+        RB_Activo_Materia.setSelected(false);
+        
+    }//GEN-LAST:event_btn_Nuevo_MateriaActionPerformed
+
+    private void btn_Guardar_MateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Guardar_MateriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_Guardar_MateriaActionPerformed
+
                                                
     private void opcionSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionSalirActionPerformed
         int confirm = JOptionPane.showConfirmDialog(
@@ -756,6 +781,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private void form_materiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_form_materiaActionPerformed
         eliminarInternalFrames();
         IF_Materia.setVisible(true);
+        JT_CodigoMateria.setEditable(false);
         
         // Luego, cuando desees abrir la ventana interna:
         if (IF_Materia == null || IF_Materia.isClosed()) {            
@@ -770,6 +796,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
 
     private void form_manejoInscripcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_form_manejoInscripcionesActionPerformed
         cargarAlumnosComboBox(CB_SeleccionAlumno);
+        RB_Ninguno.setVisible(false);
         eliminarInternalFrames();
         IF_Administracion.setVisible(true);
         
@@ -808,10 +835,6 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         JDC_FechaNac.setDate(null);        
     }//GEN-LAST:event_btn_Nuevo_AlumnoActionPerformed
 
-    private void btn_Eliminar_AlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Eliminar_AlumnoActionPerformed
-        
-    }//GEN-LAST:event_btn_Eliminar_AlumnoActionPerformed
-
     private void btn_Guardar_AlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Guardar_AlumnoActionPerformed
         AlumnoData alumData = new AlumnoData();        
         
@@ -824,11 +847,11 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         // Convertir Date a LocalDate puuufff!!
         LocalDate fechaNac = LocalDate.parse(date);
         
-        //java.sql.Date sqlDate = new java.sql.Date(fechaNac); // Convertimos a java.sql.Date        
-        boolean estado = true;
+               
+        boolean estado = RB_Activo.isSelected(); //Verifico que el estado del radioButton según el estado del alumno
 
         Alumno alum = new Alumno(Integer.parseInt(dni), nombre, apellido, fechaNac, estado);
-        alumData.guardarAlumno(alum);        
+        alumData.guardarAlumnoVE(alum);        
     }//GEN-LAST:event_btn_Guardar_AlumnoActionPerformed
     
     public static boolean esNumeroDNI(String str) {
@@ -851,8 +874,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
             return false; // No se pudo convertir a entero.
         }
     }
-    
-    
+            
     private void btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BuscarActionPerformed
                       
         AlumnoData alumData = new AlumnoData();
@@ -872,12 +894,13 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
             String nombre = alumnoBuscado.get(0).getNombre();
             LocalDate localDate = alumnoBuscado.get(0).getFechaNac();
             java.util.Date utilDate = java.util.Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-
+            boolean activo = alumnoBuscado.get(0).isActivo();
+            
             // Muestra los datos en los campos de información
             JT_Apellido.setText(apellido);
             JT_Nombre.setText(nombre);
-            JDC_FechaNac.setDate(utilDate);
-            RB_Activo.setSelected(true);            
+            JDC_FechaNac.setDate(utilDate);           
+            RB_Activo.setSelected(activo); // Establecemos el estado del RadioButton           
         
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "El alumno no existe en las listas\nIntenta con otro DNI");
@@ -975,6 +998,44 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         }
     }
     
+
+    private void btn_Buscar_Cod_MateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Buscar_Cod_MateriaActionPerformed
+        
+            MateriaData matData = new MateriaData();            
+            ArrayList<Materia> matAlmacen = new ArrayList<>();            
+            boolean esValido = esNumeroValido(JT_CodigoMateria.getText()); //Evaluo si en el JT_CodigoMateria se colocó un número positivo
+            
+            if (esValido) {
+                try {
+                    String nombreMateria = JT_NombreMateria.getText();
+                    matAlmacen.add(matData.buscarMateriaPorNombre(nombreMateria));
+                    // Obtengo la materia almacenada y luego accedo a sus datos
+                    int codigo = matAlmacen.get(0).getId_materia();
+                    String nombre = matAlmacen.get(0).getNombre();
+                    int anio = matAlmacen.get(0).getAnio_materia();               
+
+                    //Mostrando los datos en los campos de texto
+                    String codigoAString = String.valueOf(codigo);
+                    String anioAString = String.valueOf(anio);
+
+                    JT_CodigoMateria.setText(codigoAString);
+                    JT_NombreMateria.setText(nombre);
+                    JT_AñoMateria.setText(anioAString);
+                    RB_Activo_Materia.setSelected(true);                
+                
+            }catch (NullPointerException ex) {
+                JOptionPane.showMessageDialog(null, "Esta materia aún no ha sido creada.\nTe invito a crearla.");
+            }   catch (SQLException ex) {  
+                    Logger.getLogger(GestionUniversidadGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }  
+            
+        } else  {
+            JOptionPane.showMessageDialog(null, "Ingresa un nombre válido");
+        }
+        
+    }//GEN-LAST:event_btn_Buscar_Cod_MateriaActionPerformed
+
+
     private void darkThemeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkThemeActionPerformed
                
         try {
@@ -988,7 +1049,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private void lightThemeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lightThemeActionPerformed
         
         try {
-            UIManager.setLookAndFeel(new FlatLightOwlIJTheme()); // Cambiar al tema diurno
+            UIManager.setLookAndFeel(new FlatCyanLightIJTheme()); // Cambiar al tema diurno
             SwingUtilities.updateComponentTreeUI(GestionUniversidadGUI.this);
         } catch (UnsupportedLookAndFeelException ex) {
             ex.printStackTrace();
@@ -1001,12 +1062,13 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
         // Obtener el alumno seleccionado en el ComboBox CB_SeleccionAlumno
         Alumno alumnoSeleccionado = (Alumno) CB_SeleccionAlumno.getSelectedItem();        
         
-        if (!RB_MateriasInsc.isSelected()) {
-            RB_MateriasNoInsc.setEnabled(true);
+        if (RB_MateriasInsc.isSelected()) {
+            btn_Inscripcion.setEnabled(false);
+            btn_AnularInsc.setEnabled(true);
         }
         
         if (RB_MateriasInsc.isSelected()) {
-            RB_MateriasNoInsc.setEnabled(false);
+            
             if (alumnoSeleccionado != null) {
                 // Obtener el ID del alumno
                 int idAlumno = alumnoSeleccionado.getId_alumno();
@@ -1014,13 +1076,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
                 // Llamar al método obtenerMateriasCursadas() con el ID del alumno
                 List<Materia> materiasCursadas = insc.obtenerMateriasCursadas(idAlumno);
 
-                // Llenar la JTable TablaInscripciones con los datos de materiasCursadas
-                DefaultTableModel model = (DefaultTableModel) Tabla_Inscripciones.getModel();
-                model.setRowCount(0); // Limpiar la tabla antes de llenarla
-
-                materiasCursadas.forEach((materia) -> {
-                    model.addRow(new Object[]{materia.getId_materia(), materia.getNombre(), materia.getAnio_materia()});            
-                });
+                refrescarTabla(materiasCursadas);
 
                 centrarCeldas(Tabla_Inscripciones); // Con esto me aseguro que las celdas estén centradas
 
@@ -1032,60 +1088,178 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     
     
     }//GEN-LAST:event_RB_MateriasInscActionPerformed
-    
-    //TODO: Está causando problemas el usar el radioButton de manera directa, hay que ver eso, implementarlo de otra manera
-    
+      
     private void RB_MateriasNoInscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RB_MateriasNoInscActionPerformed
-        InscripcionData insc = new InscripcionData();
+        InscripcionData inscData = new InscripcionData();
         // Obtener el alumno seleccionado en el ComboBox CB_SeleccionAlumno
         Alumno alumnoSeleccionado = (Alumno) CB_SeleccionAlumno.getSelectedItem();        
         
-        if (!RB_MateriasNoInsc.isSelected()) {
-            RB_MateriasInsc.setEnabled(true);
+        if (RB_MateriasNoInsc.isSelected()) {
+            btn_AnularInsc.setEnabled(false);
+            btn_Inscripcion.setEnabled(true);
         }
         
         if (RB_MateriasNoInsc.isSelected()) {
-            RB_MateriasInsc.setEnabled(false);
+            
             if (alumnoSeleccionado != null) {
                 // Obtener el ID del alumno
                 int idAlumno = alumnoSeleccionado.getId_alumno();
 
                 // Llamar al método obtenerMateriasCursadas() con el ID del alumno
-                List<Materia> materiasCursadas = insc.obtenerMateriasNoCursadas(idAlumno);
+                List<Materia> materiasNoCursadas = inscData.obtenerMateriasNoCursadas(idAlumno);
 
-                // Llenar la JTable TablaInscripciones con los datos de materiasCursadas
-                DefaultTableModel model = (DefaultTableModel) Tabla_Inscripciones.getModel();
-                model.setRowCount(0); // Limpiar la tabla antes de llenarla
-
-                materiasCursadas.forEach((materia) -> {
-                    model.addRow(new Object[]{materia.getId_materia(), materia.getNombre(), materia.getAnio_materia()});            
-                });
-
-                centrarCeldas(Tabla_Inscripciones); // Con esto me aseguro que las celdas estén centradas
+                refrescarTabla(materiasNoCursadas);
 
             } else {                
                 // Manejar el caso en el que no se ha seleccionado un alumno
                 JOptionPane.showMessageDialog(null, "Por favor, selecciona un alumno.");
             }
-        }
-        
+        }    
         
     }//GEN-LAST:event_RB_MateriasNoInscActionPerformed
+    
+    public void refrescarTabla(List<Materia> lista){
+        // Llenar la JTable TablaInscripciones con los datos de materiasCursadas
+        DefaultTableModel model = (DefaultTableModel) Tabla_Inscripciones.getModel();
+        model.setRowCount(0); // Limpiar la tabla antes de llenarla
 
-    private void btn_mostrarMateriasNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_mostrarMateriasNotasActionPerformed
+        lista.forEach((materia) -> {
+            model.addRow(new Object[]{materia.getId_materia(), materia.getNombre(), materia.getAnio_materia()});            
+        });
+
+        centrarCeldas(Tabla_Inscripciones); // Con esto me aseguro que las celdas estén centradas
+    }
         
-    }//GEN-LAST:event_btn_mostrarMateriasNotasActionPerformed
-
-    private void JCB_SelecAlumnosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JCB_SelecAlumnosKeyReleased
+    
+    
+    private void btn_InscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InscripcionActionPerformed
+        
+        int filaSeleccionada = Tabla_Inscripciones.getSelectedRow();
+        if (filaSeleccionada != -1) {
+        // Obtenemos los valores de las celdas en las columnas 'Id', 'Nombre' y 'Año'
+        int idMateria = Integer.parseInt(Tabla_Inscripciones.getValueAt(filaSeleccionada, 0).toString());
+        String nombre = Tabla_Inscripciones.getValueAt(filaSeleccionada, 1).toString();
+        int año = Integer.parseInt(Tabla_Inscripciones.getValueAt(filaSeleccionada, 2).toString());
+        
+        Materia mat = new Materia(idMateria, nombre, año);        
+        Alumno alum = (Alumno) CB_SeleccionAlumno.getSelectedItem();
+        
+        Inscripcion insc = new Inscripcion(alum, mat, NORMAL);        
         InscripcionData inscData = new InscripcionData();
-        Inscripcion insc = new Inscripcion();
-        Alumno alumnoSeleccionado = (Alumno) JCB_SelecAlumnos.getSelectedItem();
-        int idAlumno = alumnoSeleccionado.getId_alumno();
         
-        inscData.obtenerInscripcionesPorAlumno(idAlumno);
+        inscData.guardarInscripcion(insc);
         
+        int idAlumno = alum.getId_alumno();
+        List<Materia> listMaterias = inscData.obtenerMateriasNoCursadas(idAlumno);
         
+        RB_MateriasInsc.setSelected(false);
+        RB_MateriasNoInsc.setSelected(false);
+        RB_Ninguno.setSelected(true);
+        refrescarTabla(listMaterias);   
         
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecciona un item por favor.");
+        }
+    }//GEN-LAST:event_btn_InscripcionActionPerformed
+
+    private void btn_AnularInscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AnularInscActionPerformed
+        int filaSeleccionada = Tabla_Inscripciones.getSelectedRow();
+        if (filaSeleccionada != -1) {
+        // Obtenemos los valores de las celdas en las columnas 'Id', 'Nombre' y 'Año'
+        int idMateria = Integer.parseInt(Tabla_Inscripciones.getValueAt(filaSeleccionada, 0).toString());
+                      
+        Alumno alum = (Alumno) CB_SeleccionAlumno.getSelectedItem();
+                      
+        InscripcionData inscData = new InscripcionData();
+        int idAlumno = alum.getId_alumno();
+        
+        inscData.borrarInscripcionMateriaAlumno(idAlumno, idMateria);        
+        
+        List<Materia> listMaterias = inscData.obtenerMateriasCursadas(idAlumno);
+        
+        RB_MateriasInsc.setSelected(false);
+        RB_MateriasNoInsc.setSelected(false);
+        RB_Ninguno.setSelected(true);
+        refrescarTabla(listMaterias);   
+        
+        }else{
+           JOptionPane.showMessageDialog(null, "Selecciona un item por favor."); 
+        }
+    }//GEN-LAST:event_btn_AnularInscActionPerformed
+            
+    private void CB_SeleccionAlumnoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CB_SeleccionAlumnoItemStateChanged
+        RB_Ninguno.setSelected(true);
+    }//GEN-LAST:event_CB_SeleccionAlumnoItemStateChanged
+
+    private void btn_GuardarNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarNotaActionPerformed
+        Materia mat = new Materia();
+        InscripcionData inscData = new InscripcionData();
+        Alumno alum = (Alumno) JCB_SelecAlumnos.getSelectedItem();
+        
+        int filaSeleccionada = Tabla_Notas.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            int idMateria = Integer.parseInt(Tabla_Notas.getValueAt(filaSeleccionada, 0).toString());
+            int idAlumno = alum.getId_alumno();            
+            
+            // Obtén el valor de la celda editada            
+            int columnaNota = 2; // La columna "Nota" es la tercera columna (0, 1, 2)
+            double nuevaNota = (double) Tabla_Notas.getValueAt(filaSeleccionada, columnaNota);
+            
+            List<Inscripcion> listaInscripciones = inscData.obtenerInscripcionesPorAlumno2(idAlumno);
+            refrescarTablaNotas(mat, listaInscripciones);
+            
+            inscData.actualizarNota(idMateria, nuevaNota, idAlumno);
+            actualizarTablaNotas();
+            }else{
+            JOptionPane.showMessageDialog(null, "Selecciona una nota para modificar por favor");
+        }
+    }//GEN-LAST:event_btn_GuardarNotaActionPerformed
+    
+    public void refrescarTablaNotas(Materia materia, List<Inscripcion> lista){
+        // Llenar la JTable Tabla_Notas con los datos de obtenerInscripcionesPorAlumno()
+        DefaultTableModel model = (DefaultTableModel) Tabla_Notas.getModel();
+        model.setRowCount(0); // Limpiar la tabla antes de llenarla
+
+        lista.forEach((inscripcion) -> {
+        model.addRow(new Object[]{inscripcion.getMateria().getId_materia(), inscripcion.getMateria().getNombre(), inscripcion.getNota()});
+        });
+
+        centrarCeldas(Tabla_Notas); // Con esto me aseguro que las celdas estén centradas
+    }
+    
+    public void actualizarTablaNotas(){
+        InscripcionData inscData = new InscripcionData();
+        int idAlumno = ((Alumno) JCB_SelecAlumnos.getSelectedItem()).getId_alumno();
+        MateriaData matData = new MateriaData();
+        
+//        matData.buscarMateria(WIDTH)
+        
+        List<Inscripcion> inscripciones = inscData.obtenerInscripcionesPorAlumno2(idAlumno);
+
+        // Obtengo el modelo de la tabla existente
+        DefaultTableModel modeloTabla = (DefaultTableModel) Tabla_Notas.getModel();
+
+        // Limpia la tabla (borra todas las filas existentes)
+        modeloTabla.setRowCount(0);
+
+        // Itero sobre la lista de inscripciones y agrego cada una a la tabla
+        inscripciones.forEach((inscripcion) -> {
+            // Agrega una fila con los datos en el mismo orden que las columnas ('Id', 'Nombre', 'Nota')
+            modeloTabla.addRow(new Object[]{inscripcion.getMateria().getId_materia(), inscripcion.getMateria().getNombre(), inscripcion.getNota()});
+        });
+
+        centrarCeldas(Tabla_Notas);
+
+        // Actualiza la tabla para que se muestren los nuevos datos
+        modeloTabla.fireTableDataChanged();
+
+    }//GEN-LAST:event_JCB_SelecAlumnosItemStateChanged
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       
+      JOptionPane.showMessageDialog(null, "INTEGRANTES: \n Eduardo Andres Cardozo \n Julio Cesar Silvero Gonzalez \n Sebastian Zuluaga Piedrahita \n Marcelo Claudio Garcia");  
+        
+      
         //inscData.actualizarNota(WIDTH, NORMAL, );
     }//GEN-LAST:event_JCB_SelecAlumnosKeyReleased
 
@@ -1204,7 +1378,16 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btn_Buscar_Cod_MateriaActionPerformed
+
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    }
+
     
+    private void JCB_SelecAlumnosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JCB_SelecAlumnosItemStateChanged
+        actualizarTablaNotas();
+    }//GEN-LAST:event_JCB_SelecAlumnosItemStateChanged
+       
     private void centrarCeldas(JTable tabla){
         // Configurar el centrado de las celdas en la tabla
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -1260,8 +1443,6 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTN_AnularInsc;
-    private javax.swing.JButton BTN_Inscripcion;
     private javax.swing.JComboBox<Object> CB_SeleccionAlumno;
     private javax.swing.JComboBox<String> CB_Seleccion_Materia;
     private javax.swing.JInternalFrame IF_Administracion;
@@ -1287,22 +1468,24 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton RB_Activo_Materia;
     private javax.swing.JRadioButton RB_MateriasInsc;
     private javax.swing.JRadioButton RB_MateriasNoInsc;
+    private javax.swing.JRadioButton RB_Ninguno;
     private javax.swing.JScrollPane SP_Tabla;
     private javax.swing.JMenu Soporte;
     private javax.swing.JTable TablaListAlumMateria;
     private javax.swing.JTable Tabla_Inscripciones;
     private javax.swing.JTable Tabla_Notas;
+    private javax.swing.JButton btn_AnularInsc;
     private javax.swing.JButton btn_Buscar;
-    private javax.swing.JButton btn_Buscar_Cod_Materia;
+    private javax.swing.JButton btn_Buscar_Cod_Materia
     private javax.swing.JButton btn_Eliminar_Alumno;
+
     private javax.swing.JButton btn_GuardarNota;
     private javax.swing.JButton btn_Guardar_Alumno;
     private javax.swing.JButton btn_Guardar_Materia;
+    private javax.swing.JButton btn_Inscripcion;
     private javax.swing.JButton btn_Nuevo_Alumno;
     private javax.swing.JButton btn_Nuevo_Materia;
-    private javax.swing.JButton btn_Salir;
-    private javax.swing.JButton btn_Salir_Materia;
-    private javax.swing.JButton btn_mostrarMateriasNotas;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JMenu cambiarTema;
     private javax.swing.JMenuItem consulta_alumMaterias;
     private javax.swing.JMenuItem darkTheme;
@@ -1328,6 +1511,7 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1338,56 +1522,3 @@ public class GestionUniversidadGUI extends javax.swing.JFrame {
 
     
 }
-/*
-
-import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-
-public class CenteredJTable extends JTable {
-    public CenteredJTable(DefaultTableModel model) {
-        super(model);
-
-        // Centrar todos los datos por defecto
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        setDefaultRenderer(Object.class, centerRenderer);
-    }
-}
-
-// Crear una instancia de CenteredJTable en lugar de JTable
-CenteredJTable tablaInscripciones = new CenteredJTable(modeloTabla);
-
-// Agregar la tabla personalizada a tu interfaz gráfica donde desees mostrarla
-// Por ejemplo, si tienes un JPanel llamado 'panelTabla' donde quieres agregar la tabla:
-panelTabla.add(new JScrollPane(tablaInscripciones));
-
-
-
-import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-
-public class TuClase {
-
-    public static void main(String[] args) {
-        // Crear y configurar tu JTable 'Tabla_Inscripciones'
-        JTable tablaInscripciones = new JTable();
-
-        // Configurar el centrado de las celdas en la tabla
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-
-        // Aplicar el centrado a todas las columnas de la tabla
-        for (int i = 0; i < tablaInscripciones.getColumnCount(); i++) {
-            tablaInscripciones.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-        }
-
-        // Agregar la tabla a tu interfaz gráfica donde desees mostrarla
-        // Por ejemplo, si tienes un JPanel llamado 'panelTabla' donde quieres agregar la tabla:
-        panelTabla.add(new JScrollPane(tablaInscripciones));
-    }
-}
-
-
-
-*/

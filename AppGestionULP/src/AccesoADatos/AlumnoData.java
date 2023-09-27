@@ -49,11 +49,58 @@ public class AlumnoData {
                 }   }
         
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno. Error: "+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "El alumno ya existe con estos datos.\nPrueba con 'modificar' algún dato.");
 
-}
     }
+        }
     
+       
+    public void guardarAlumnoVE(Alumno alumno) {
+        String sqlSelect = "SELECT idAlumno FROM alumno WHERE dni = ?";
+        String sqlInsert = "INSERT INTO alumno (dni, apellido, nombre, fechaNacimiento, estado) VALUES (?, ?, ?, ?, ?)";
+        String sqlUpdate = "UPDATE alumno SET apellido = ?, nombre = ?, fechaNacimiento = ?, estado = ? WHERE dni = ?";
+
+        try {
+            // Verificar si el alumno ya existe
+            try (PreparedStatement selectStatement = conex.Conexion_Maria().prepareStatement(sqlSelect)) {
+                selectStatement.setInt(1, alumno.getDni());
+                ResultSet resultSet = selectStatement.executeQuery();
+
+                if (resultSet.next()) {
+                    //int idAlumnoExistente = resultSet.getInt("idAlumno");
+                    // El alumno ya existe, ofrecer opción de actualización
+                    int opcion = JOptionPane.showConfirmDialog(null, "El alumno ya existe. ¿Desea actualizar los datos?",
+                            "Confirmar actualización", JOptionPane.YES_NO_OPTION);
+                    if (opcion == JOptionPane.YES_OPTION) {
+                        // Actualizar los datos existentes
+                        try (PreparedStatement updateStatement = conex.Conexion_Maria().prepareStatement(sqlUpdate)) {
+                            updateStatement.setString(1, alumno.getApellido());
+                            updateStatement.setString(2, alumno.getNombre());
+                            updateStatement.setDate(3, Date.valueOf(alumno.getFechaNac()));
+                            updateStatement.setBoolean(4, alumno.isActivo());
+                            updateStatement.setInt(5, alumno.getDni());
+                            updateStatement.executeUpdate();
+                            JOptionPane.showMessageDialog(null, "Datos del alumno actualizados con éxito.");
+                        }
+                    }
+                } else {
+                    // El alumno no existe, realizar la inserción
+                    try (PreparedStatement insertStatement = conex.Conexion_Maria().prepareStatement(sqlInsert)) {
+                        insertStatement.setInt(1, alumno.getDni());
+                        insertStatement.setString(2, alumno.getApellido());
+                        insertStatement.setString(3, alumno.getNombre());
+                        insertStatement.setDate(4, Date.valueOf(alumno.getFechaNac()));
+                        insertStatement.setBoolean(5, alumno.isActivo());
+                        insertStatement.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Alumno añadido con éxito.");
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos: " + ex.getMessage());
+        }
+    }
+
     
     
     public Alumno buscarAlumno(int dni) throws SQLException {
@@ -109,7 +156,7 @@ public class AlumnoData {
     public Alumno buscarAlumnoPorDni(int dni) {
         Alumno alumno = null;
         ArrayList<Alumno> alum = new ArrayList<>();
-        String sql = "SELECT idAlumno, dni, apellido, nombre, fechaNacimiento FROM alumno WHERE dni=? AND estado = 1";
+        String sql = "SELECT * FROM alumno WHERE dni=?";
         PreparedStatement ps = null;    
         
         try {                
@@ -124,18 +171,19 @@ public class AlumnoData {
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
-                alumno.setActivo(true); 
+                alumno.setActivo(rs.getBoolean("estado"));  // Establecer el estado activo o no activo 
                 alum.add(alumno);
                 //System.out.println(alum);
                 } 
             ps.close();
         } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno "+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno "+ex.getMessage());
+            System.out.println("Error: " + ex);
         }
             return alumno;       
     }
-
-
+    
+    
     public List<Alumno> listarAlumnos() {
         
         List<Alumno> alumnos = new ArrayList<>();
@@ -156,7 +204,7 @@ public class AlumnoData {
                 }   }        
         
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno "+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno "+ex.getMessage());
         }
         //System.out.println(alumnos);
         return alumnos;
